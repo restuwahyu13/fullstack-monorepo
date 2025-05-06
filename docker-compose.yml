@@ -1,0 +1,55 @@
+##############################
+# APP SERVICE ENVIRONMENT
+##############################
+services:
+##############################
+# API SERVICE ENVIRONMENT
+##############################
+  api:
+    container_name: api-monorepo
+    restart: always
+    build:
+      context: apps/backend-repo
+      dockerfile: Dockerfile
+    healthcheck:
+      test: "env | grep HOME"
+      retries: 5
+      start_period: 15s
+      interval: 30s
+      timeout: 60s
+    env_file: apps/backend-repo/.env.production
+    ports:
+      - 4000:4000
+    volumes:
+      - .:/usr/apps/backend-repo
+      - /usr/apps/backend-repo/node_modules
+    networks:
+      - monorepo-networks
+##############################
+# WEB SERVICE ENVIRONMENT
+##############################
+  web:
+    container_name: web-monorepo
+    restart: always
+    build:
+      context: apps/frontend-repo
+      dockerfile: Dockerfile
+    healthcheck:
+      test: "env | grep HOME"
+      retries: 5
+      start_period: 15s
+      interval: 30s
+      timeout: 60s
+    env_file: apps/frontend-repo/.env.production
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/apps/frontend-repo
+      - /usr/apps/frontend-repo/node_modules
+    networks:
+      - monorepo-networks
+#############################
+# NETWORKS SHARING GROUP
+#############################
+networks:
+  monorepo-networks:

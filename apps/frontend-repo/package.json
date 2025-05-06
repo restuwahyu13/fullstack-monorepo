@@ -1,0 +1,50 @@
+{
+	"name": "frontend-monorepo",
+	"private": true,
+	"version": "0.0.1",
+	"description": "Web client monorepo",
+	"main": ".next",
+	"scripts": {
+		"build": "next build",
+		"start": "NODE_ENV=production next start",
+		"dev": "NODE_ENV=development next dev",
+		"lint": "next lint",
+		"runtime": "pm2-runtime pm2.config.js"
+	},
+	"author": {
+		"name": "Restu Wahyu Saputra",
+		"email": "restuwahyu13@gmail.com",
+		"url": "https://github.com/restuwahyu13"
+	},
+	"maintainers": [
+		"Restu Wahyu Saputra"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/restuwahyu13/fullstack-monorepo"
+	},
+	"license": "UNLICENSED",
+	"engines": {
+		"node": ">= 20.x.x",
+		"npm": ">= 10.x.x"
+	},
+	"dependencies": {
+		"next": "15.3.1",
+		"react": "^19.1.0",
+		"react-dom": "^19.1.0"
+	},
+	"devDependencies": {
+		"@eslint/eslintrc": "^3.3.1",
+		"@next/eslint-plugin-next": "^15.3.1",
+		"@tailwindcss/postcss": "^4.1.5",
+		"@types/node": "^22.14.1",
+		"@types/react": "^19.1.2",
+		"@types/react-dom": "^19.1.2",
+		"critters": "^0.0.23",
+		"eslint": "^9.25.1",
+		"eslint-config-next": "15.3.1",
+		"postcss": "^8.5.3",
+		"tailwindcss": "^4.1.5",
+		"typescript": "^5.8.3"
+	}
+}

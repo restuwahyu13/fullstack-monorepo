@@ -1,0 +1,28 @@
+FROM node:22-alpine
+USER ${USER}:${USER}
+
+LABEL name="Restu Wahyu Saputra"
+LABEL linkedin="https://www.linkedin.com/in/restuwahyu13"
+LABEL gitHub="https://github.com/restuwahyu13"
+
+COPY ./package*.json ./
+COPY ./ ./
+
+RUN apk update \
+    && apk -u list \
+    && apk upgrade
+
+RUN rm -rf node_modules dist .~/.npm \
+    && npm cache clean -f \
+    && npm config delete proxy \
+    && npm config delete https-proxy \
+    && npm config set fetch-retry-mintimeout 3600000 \
+    && npm config set fetch-retry-maxtimeout 3600000 \
+    && npm config set fetch-timeout 3600000 \
+    && npm i -g npm@latest --loglevel verbose \
+    && npm i pm2 -g --loglevel verbose \
+    && npm i --loglevel verbose \
+    && npm run build
+
+EXPOSE 4000
+CMD npm run runtime

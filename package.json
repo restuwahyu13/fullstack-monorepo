@@ -1,0 +1,38 @@
+{
+	"name": "root-monorepo",
+	"private": true,
+	"version": "0.0.1",
+	"description": "Root monorepo",
+	"scripts": {
+		"build": "turbo run build",
+		"dev": "turbo run dev --parallel",
+		"lint": "turbo run lint",
+		"check-types": "turbo run check-types",
+		"format": "prettier --write \"**/*.{ts,tsx,md}\""
+	},
+	"workspaces": [
+		"apps/*",
+		"shared/*"
+	],
+	"author": {
+		"name": "Restu Wahyu Saputra",
+		"email": "restuwahyu13@gmail.com",
+		"url": "https://github.com/restuwahyu13"
+	},
+	"maintainers": [
+		"Restu Wahyu Saputra"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/restuwahyu13/fullstack-monorepo"
+	},
+	"license": "UNLICENSED",
+	"engines": {
+		"node": ">= 20.x.x",
+		"npm": ">= 10.x.x"
+	},
+	"devDependencies": {
+		"turbo": "latest"
+	},
+	"packageManager": "npm@10.9.2"
+}

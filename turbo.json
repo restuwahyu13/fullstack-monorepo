@@ -1,0 +1,23 @@
+{
+	"$schema": "https://turbo.build/schema.json",
+	"ui": "tui",
+	"tasks": {
+		"build": {
+			"dependsOn": ["^build"],
+			"outputs": [".next/**", "dist/**", "!.next/cache/**"],
+			"cache": true
+		},
+		"dev": {
+			"persistent": true,
+			"cache": false
+		},
+		"start": {
+			"dependsOn": ["^start"],
+			"persistent": true,
+			"cache": false
+		}
+	},
+	"envMode": "loose",
+	"globalDependencies": [".env.development", "tsconfig.json", "package.json"],
+	"globalEnv": ["NODE_ENV"]
+}

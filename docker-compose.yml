@@ -46,6 +46,8 @@ services:
     volumes:
       - .:/usr/apps/frontend-repo
       - /usr/apps/frontend-repo/node_modules
+    depends_on:
+      - api
     networks:
       - monorepo-networks
 #############################

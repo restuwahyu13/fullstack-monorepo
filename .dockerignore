@@ -39,3 +39,21 @@ next-env.d.ts
 package-lock.json
 package.json
 turbo.json
+
+# firebase emulator
+# firebase emulator
+public
+dataconnect
+dataconnect-generated
+functions
+monorepo
+extensions
+firestore.indexes.json
+firestore.rules
+remoteconfig.template.json
+storage.rules
+apphosting.emulator.yaml
+apphosting.yaml
+database.rules.json
+firebase.json
+.firebaserc

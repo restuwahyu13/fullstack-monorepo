@@ -1,9 +1,4 @@
 FROM node:22-alpine
-USER ${USER}:${USER}
-
-LABEL name="Restu Wahyu Saputra"
-LABEL linkedin="https://www.linkedin.com/in/restuwahyu13"
-LABEL gitHub="https://github.com/restuwahyu13"
 
 COPY ./package*.json ./
 COPY ./ ./

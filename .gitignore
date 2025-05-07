@@ -25,6 +25,7 @@ apps/backend-repo/.DS_Store
 
 # debug
 npm-debug.log*
+firebase-debug.log
 apps/frontend-repo/npm-debug.log*
 apps/backend-repo/npm-debug.log*
 
@@ -38,3 +39,20 @@ apps/backend-repo/.env.*
 
 # typescript
 next-env.d.ts
+
+# firebase emulator
+public
+dataconnect
+dataconnect-generated
+functions
+monorepo
+extensions
+firestore.indexes.json
+firestore.rules
+remoteconfig.template.json
+storage.rules
+apphosting.emulator.yaml
+apphosting.yaml
+database.rules.json
+firebase.json
+.firebaserc

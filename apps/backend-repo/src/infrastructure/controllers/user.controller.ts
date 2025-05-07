@@ -27,7 +27,7 @@ export class UserController {
   findAllUser(): RequestHandler {
     return async (req: Request, res: Response, _next: NextFunction): Promise<OutgoingMessage> => {
       try {
-        const service: ApiResponse = await this.usecase.findAllUser()
+        const service: ApiResponse = await this.usecase.findAllUser(rawParser(req.query))
         return apiResponse(service, res)
       } catch (e: any) {
         return apiResponse(e, res)

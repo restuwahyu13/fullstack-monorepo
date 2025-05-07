@@ -3,18 +3,19 @@ import { OutgoingMessage } from 'node:http'
 import { StatusCodes as status } from 'http-status-codes'
 import jsonwebtoken, { JwtPayload } from 'jsonwebtoken'
 import validator from 'validator'
-import { JWTPayload, JWTVerifyResult } from 'jose'
+import { DecodedIdToken } from 'firebase-admin/auth'
 
 import { apiResponse } from '~/infrastructure/common/helpers/helper.apiResponse'
-import { Container, Injectable } from '~/infrastructure/common/helpers/helper.di'
-import { Encryption } from '~/infrastructure/common/helpers/helper.encryption'
-import { JsonWebToken } from '~/libs/lib.jwt'
+import { Injectable } from '~/infrastructure/common/helpers/helper.di'
+import { Firebase } from '~/infrastructure/common/configs/config.firebase'
 
 @Injectable()
 export class AuthMiddleware {
+  constructor() {}
+
   async use(req: Request, res: Response, next: NextFunction): Promise<OutgoingMessage> {
     try {
-      const jwt: InstanceType<typeof JsonWebToken> = new JsonWebToken()
+      const firebase: Firebase = new Firebase()
       const headers: Record<string, any> = req.headers
 
       if (!headers.hasOwnProperty('authorization')) {
@@ -33,18 +34,10 @@ export class AuthMiddleware {
         throw apiResponse({ stat_code: status.UNAUTHORIZED, error: 'Unauthorized invalid token' })
       }
 
-      const secretKey: string = Buffer.from(`${jwtDecode.aud}:${jwtDecode.iss}:${jwtDecode.sub}:${process.env.JWT_EXPIRED}`).toString('hex')
-      const secretData: Buffer = Buffer.from(jwtDecode.jti, 'hex')
-      const jti: string = Encryption.AES256Decrypt(secretKey, secretData).toString()
-
-      const verifyRes: JWTVerifyResult<JWTPayload> = await jwt.verify(jti, authToken)
+      const verifyRes: DecodedIdToken = await firebase.auth().verifyIdToken(authToken)
       if (!verifyRes) {
         throw apiResponse({ stat_code: status.UNAUTHORIZED, error: 'Unauthorized invalid token' })
       }
-
-      const userId: string = jti
-      Container.register('User', { useValue: userId })
-      Container.register('Req', { useValue: req })
 
       next()
     } catch (e: any) {

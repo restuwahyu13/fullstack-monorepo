@@ -5,7 +5,7 @@ import { Inject, Injectable } from '~/infrastructure/common/helpers/helper.di'
 import { Firebase } from '~/infrastructure/common/configs/config.firebase'
 import { logger } from '~/infrastructure/common/helpers/helper.logger'
 import { EntityUser } from '~/infrastructure/entities/user.entity'
-import { CreateUserDTO, ParamsUserIdDTO, UpdateUserDTO } from '~/domain/dtos/user.dto'
+import { CreateUserDTO, ParamsUserIdDTO, QueryUserDTO, UpdateUserDTO } from '~/domain/dtos/user.dto'
 
 @Injectable()
 export class UserRepository {
@@ -73,15 +73,37 @@ export class UserRepository {
     }
   }
 
-  async findAll(): Promise<EntityUser[]> {
+  async findAll(query?: QueryUserDTO): Promise<EntityUser[]> {
     let records: Record<string, any>[] = []
 
     try {
       const firestore: FirebaseFirestore.Firestore = this.firebase.firestore()
-      const collection: FirebaseFirestore.CollectionReference = firestore.collection('users')
+      let collection: FirebaseFirestore.Query = firestore.collection('users')
 
-      const res: FirebaseFirestore.QuerySnapshot<DocumentData> = await collection.get()
-      res.forEach((doc: FirebaseFirestore.QueryDocumentSnapshot<DocumentData, DocumentData>) => {
+      if (query?.filter) {
+        if (query?.filter?.totalAverageWeightRatings) {
+          collection = collection.where('totalAverageWeightRatings', '==', query.filter.totalAverageWeightRatings)
+        }
+        if (query?.filter?.numberOfRents) {
+          collection = collection.where('numberOfRents', '==', +query.filter.numberOfRents)
+        }
+      } else if (query?.search) {
+        collection = collection.where('totalAverageWeightRatings', '==', query.search)
+        collection = collection.where('numberOfRents', '==', query.search)
+      } else {
+        collection.offset(query?.page)
+      }
+
+      if (query?.sort) {
+        collection = collection.orderBy(query.sort_by || 'highPriority', query.sort as any)
+      }
+
+      if (query?.limit) {
+        collection = collection.limit(query.limit)
+      }
+
+      const res: FirebaseFirestore.QuerySnapshot<FirebaseFirestore.DocumentData> = await collection.get()
+      res.forEach((doc: FirebaseFirestore.QueryDocumentSnapshot<FirebaseFirestore.DocumentData>) => {
         if (doc) {
           records.push({
             id: doc.id,

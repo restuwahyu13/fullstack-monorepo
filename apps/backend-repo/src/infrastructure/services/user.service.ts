@@ -1,17 +1,16 @@
 import { StatusCodes as status } from 'http-status-codes'
+import { isJSON } from 'class-validator'
 
 import { Inject, Injectable } from '~/infrastructure/common/helpers/helper.di'
 import { ApiResponse, apiResponse } from '~/infrastructure/common/helpers/helper.apiResponse'
-import { UserMetadata } from '~/infrastructure/common/helpers/helper.userMetadata'
 import { UserRepository } from '~/infrastructure/repositories/user.repositorie'
 import { EntityUser } from '~/infrastructure/entities/user.entity'
-import { CreateUserDTO, ParamsUserIdDTO, UpdateUserDTO } from '~/domain/dtos/user.dto'
+import { CreateUserDTO, ParamsUserIdDTO, QueryUserDTO, UpdateUserDTO } from '~/domain/dtos/user.dto'
+import { ESortQuery } from '~/domain/enums/common.enum'
 
 @Injectable()
 export class UserService {
   constructor(
-    @Inject('UserMetadata')
-    private readonly userMetadata: UserMetadata,
     @Inject('UserRepository')
     private readonly userRepository: UserRepository,
   ) {}
@@ -39,9 +38,21 @@ export class UserService {
     }
   }
 
-  async findAllUser(): Promise<ApiResponse> {
+  async findAllUser(query?: QueryUserDTO): Promise<ApiResponse> {
     try {
-      const getAllUser: EntityUser[] = await this.userRepository.findAll()
+      query.page = Number(query?.page ?? 1)
+      query.limit = Number(query?.limit ?? 10)
+      query.sort = query?.sort ?? ESortQuery.ASC
+
+      if (query?.filter) {
+        if (!isJSON(query?.filter)) throw apiResponse({ stat_code: status.UNPROCESSABLE_ENTITY, error: 'Invalid filter must be a json format' })
+        query.filter = JSON.parse(query.filter || '')
+      }
+
+      if (query.limit > 1000) query.limit = 1000
+      query.page = query.limit * (query.page - 1)
+
+      const getAllUser: EntityUser[] = await this.userRepository.findAll(query)
       if (!getAllUser) apiResponse({ stat_code: status.OK, message: 'Success', data: [] })
 
       return apiResponse({ stat_code: status.OK, message: 'Success', data: getAllUser })

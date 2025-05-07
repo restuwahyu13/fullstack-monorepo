@@ -1,9 +1,14 @@
 import { IsBase64, IsDecimal, IsNotEmpty, IsNumber, IsOptional } from 'class-validator'
+import { CommonFilterQueryDTO } from './common.dto'
 
 export class ParamsUserIdDTO {
   @IsNotEmpty()
   @IsBase64()
   id: string
+}
+
+export class QueryUserDTO extends CommonFilterQueryDTO {
+  filter?: any
 }
 
 export class CreateUserDTO {

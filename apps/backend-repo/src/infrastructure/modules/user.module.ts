@@ -7,6 +7,7 @@ import { UserController } from '~/infrastructure/controllers/user.controller'
 import { UserRoute } from '~/infrastructure/routes/user.route'
 import { UserRepository } from '~/infrastructure/repositories/user.repositorie'
 import { UserMetadata } from '~/infrastructure/common/helpers/helper.userMetadata'
+import { AuthMiddleware } from '~/infrastructure/common/middlewares/middleware.auth'
 import { ValidatorMiddleware } from '~/infrastructure/common/middlewares/middleware.validator'
 
 @Module([
@@ -26,6 +27,10 @@ import { ValidatorMiddleware } from '~/infrastructure/common/middlewares/middlew
   {
     token: 'UserMetadata',
     useClass: UserMetadata,
+  },
+  {
+    token: 'AuthMiddleware',
+    useClass: AuthMiddleware,
   },
   {
     token: 'ValidatorMiddleware',

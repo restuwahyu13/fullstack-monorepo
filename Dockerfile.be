@@ -1,7 +1,7 @@
 FROM node:22-alpine
 WORKDIR /app
 
-COPY ./package*.json turbo.json ./
+COPY ./package.json turbo.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY ./apps/backend-repo ./apps/backend-repo
 COPY ./packages ./packages
 
@@ -16,8 +16,8 @@ RUN rm -rf node_modules .~/.npm \
     && npm config set fetch-retry-mintimeout 3600000 \
     && npm config set fetch-retry-maxtimeout 3600000 \
     && npm config set fetch-timeout 3600000 \
-    && npm i npm@latest pm2 turbo -g --loglevel verbose \
-    && npm i --loglevel verbose \
+    && npm i pnpm@latest pm2@latest turbo@latest -g --loglevel verbose \
+    && pnpm i --loglevel verbose \
     && npm run build
 
 EXPOSE 4000

@@ -2,10 +2,9 @@ import { validate, ValidationError } from 'class-validator'
 import { ClassConstructor, plainToClass } from 'class-transformer'
 import { StatusCodes as status } from 'http-status-codes'
 import { Request, Response, NextFunction, RequestHandler } from 'express'
-import { apiResponse } from 'pkg-monorepo'
+import { apiResponse, Injectable } from 'pkg-monorepo'
 import { OutgoingMessage } from 'node:http'
 
-import { Injectable } from '~/infrastructure/common/helpers/helper.di'
 
 @Injectable()
 export class ValidatorMiddleware {

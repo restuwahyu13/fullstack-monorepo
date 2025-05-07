@@ -1,9 +1,10 @@
 NPM:=@npm
+PNPM=@pnpm
 COMPOSE:=@docker-compose
 
 .PHONY: i
 i:
-	${NPM} i -V
+	${PNPM} i --loglevel verbose
 
 .PHONY: build
 build:

@@ -31,9 +31,9 @@ packages/shared/.turbo/
 npm-debug.log*
 firebase-debug.log
 firestore-debug.log
-/apps/frontend-repo/npm-debug.log*
-/apps/backend-repo/npm-debug.log*
-/packages/shared/npm-debug.log*
+/apps/frontend-repo/logs
+/apps/backend-repo/logs
+/packages/shared/logs
 
 # env files
 /.env

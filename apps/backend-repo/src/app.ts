@@ -10,7 +10,6 @@ import compression from 'compression'
 import zlib from 'zlib'
 import hpp from 'hpp'
 import consola from 'consola'
-import firebase from 'firebase-admin'
 import { apiResponse, GracefulShutdown, Injectable, Container } from 'pkg-monorepo'
 
 import { AppModule } from '~/module.app'

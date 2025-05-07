@@ -8,7 +8,9 @@ services:
   api:
     container_name: api-monorepo
     restart: always
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.be
     healthcheck:
       test: "env | grep HOME"
       retries: 5
@@ -26,26 +28,28 @@ services:
 ##############################
 # WEB SERVICE ENVIRONMENT
 ##############################
-  # web:
-  #   container_name: web-monorepo
-  #   restart: always
-  #   build: .
-  #   healthcheck:
-  #     test: "env | grep HOME"
-  #     retries: 5
-  #     start_period: 15s
-  #     interval: 30s
-  #     timeout: 60s
-  #   env_file: apps/frontend-repo/.env.production
-  #   ports:
-  #     - 3000:3000
-  #   volumes:
-  #     - .:/usr/apps/frontend-repo
-  #     - /usr/apps/frontend-repo/node_modules
-  #   depends_on:
-  #     - api
-  #   networks:
-  #     - monorepo-networks
+  web:
+    container_name: web-monorepo
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.fe
+    healthcheck:
+      test: "env | grep HOME"
+      retries: 5
+      start_period: 15s
+      interval: 30s
+      timeout: 60s
+    env_file: apps/frontend-repo/.env.production
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/apps/frontend-repo
+      - /usr/apps/frontend-repo/node_modules
+    depends_on:
+      - api
+    networks:
+      - monorepo-networks
 #############################
 # NETWORKS SHARING GROUP
 #############################

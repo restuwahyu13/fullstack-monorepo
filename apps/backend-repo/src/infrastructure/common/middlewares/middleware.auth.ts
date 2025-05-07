@@ -1,12 +1,10 @@
 import { NextFunction, Request, Response } from 'express'
 import { OutgoingMessage } from 'node:http'
 import { StatusCodes as status } from 'http-status-codes'
-import jsonwebtoken, { JwtPayload } from 'jsonwebtoken'
-import validator from 'validator'
 import { DecodedIdToken } from 'firebase-admin/auth'
-import { apiResponse } from 'pkg-monorepo'
+import { isJWT } from 'class-validator'
+import { apiResponse, Injectable } from 'pkg-monorepo'
 
-import { Injectable } from '~/infrastructure/common/helpers/helper.di'
 import { Firebase } from '~/infrastructure/common/configs/config.firebase'
 
 @Injectable()
@@ -25,12 +23,7 @@ export class AuthMiddleware {
       }
 
       let authToken: string = headers.authorization.split('Bearer ')[1]
-      if (!validator.isJWT(authToken)) {
-        throw apiResponse({ stat_code: status.UNAUTHORIZED, error: 'Unauthorized invalid token' })
-      }
-
-      const jwtDecode: JwtPayload = jsonwebtoken.decode(authToken) as any
-      if (!jwtDecode) {
+      if (isJWT(authToken)) {
         throw apiResponse({ stat_code: status.UNAUTHORIZED, error: 'Unauthorized invalid token' })
       }
 

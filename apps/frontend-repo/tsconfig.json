@@ -14,24 +14,32 @@
         "*"
       ]
     },
+    "composite": true,
+    "strict": true,
+    "alwaysStrict": true,
     "esModuleInterop": true,
-    "isolatedModules": true,
-    "resolveJsonModule": true,
-    "downlevelIteration": true,
-    "allowSyntheticDefaultImports": true,
     "importHelpers": true,
     "skipLibCheck": true,
-    "incremental": true,
-    "strict": true,
-    "allowJs": true,
-    "noEmit": true,
-    "noUnusedLocals": true,
+    "downlevelIteration": true,
+    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": true,
     "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "allowJs": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "noImplicitReturns": false,
     "plugins": [
       {
         "name": "next"
       }
-    ]
+    ],
+    "noEmit": true,
+    "incremental": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true
   },
   "include": [
     "next-env.d.ts",

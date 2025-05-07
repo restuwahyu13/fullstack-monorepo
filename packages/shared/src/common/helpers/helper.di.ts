@@ -1,5 +1,6 @@
 import { autoInjectable, inject, injectAll, injectWithTransform, registry, container, delay } from 'tsyringe'
 export { Router } from 'express'
+export { DependencyContainer } from 'tsyringe'
 
 export const Injectable = autoInjectable
 export const Service = autoInjectable

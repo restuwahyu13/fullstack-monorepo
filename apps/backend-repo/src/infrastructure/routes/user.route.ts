@@ -1,4 +1,4 @@
-import { Router, Route, Inject, CreateUserDTO, ParamsUserIdDTO, UpdateUserDTO } from 'pkg-monorepo'
+import { CreateUserDTO, ParamsUserIdDTO, UpdateUserDTO, Route, Inject, Router } from 'pkg-monorepo'
 
 import { UserController } from '~/infrastructure/controllers/user.controller'
 import { ValidatorMiddleware } from '~/infrastructure/common/middlewares/middleware.validator'

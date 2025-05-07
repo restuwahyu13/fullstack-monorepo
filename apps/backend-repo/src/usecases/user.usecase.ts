@@ -1,4 +1,5 @@
-import { Injectable, Inject, CreateUserDTO, ApiResponse, QueryUserDTO, ParamsUserIdDTO, UpdateUserDTO } from 'pkg-monorepo'
+import { CreateUserDTO, ApiResponse, QueryUserDTO, ParamsUserIdDTO, UpdateUserDTO, Injectable, Inject } from 'pkg-monorepo'
+
 import { UserService } from '~/infrastructure/services/user.service'
 
 @Injectable()

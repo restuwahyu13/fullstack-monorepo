@@ -15,7 +15,7 @@ export class Environment {
   static readonly FIREBASE_CERT_TYPE: string = process.env.FIREBASE_CERT_TYPE
   static readonly FIREBASE_CERT_PROJECT_ID = process.env.FIREBASE_CERT_PROJECT_ID
   static readonly FIREBASE_CERT_PRIVATE_KEY_ID = process.env.FIREBASE_CERT_PRIVATE_KEY_ID
-  static readonly FIREBASE_CERT_PRIVATE_KEY = process.env.FIREBASE_CERT_PRIVATE_KEY
+  static readonly FIREBASE_CERT_PRIVATE_KEY = process.env.FIREBASE_CERT_PRIVATE_KEY?.replace(/\\n/g, '\n')
   static readonly FIREBASE_CERT_CLIENT_EMAIL = process.env.FIREBASE_CERT_CLIENT_EMAIL
   static readonly FIREBASE_CERT_CLIENT_ID = process.env.FIREBASE_CERT_CLIENT_ID
   static readonly FIREBASE_CERT_AUTH_URI = process.env.FIREBASE_CERT_AUTH_URI
@@ -23,7 +23,7 @@ export class Environment {
   static readonly FIREBASE_CERT_AUTH_PROVIDER_X509_CERT_URL = process.env.FIREBASE_CERT_AUTH_PROVIDER_X509_CERT_URL
   static readonly FIREBASE_CERT_CLIENT_X509_CERT_URL = process.env.FIREBASE_CERT_CLIENT_X509_CERT_URL
   static readonly FIREBASE_CERT_UNIVERSE_DOMAIN = process.env.FIREBASE_CERT_UNIVERSE_DOMAIN
-  static readonly FIREBASE_EMULATOR_HOST = process.env.FIREBASE_EMULATOR_HOST === 'true' ? true : false
+  static readonly FIREBASE_DB_URL = process.env.FIREBASE_DB_URL
   static readonly FIREBASE_AUTH_EMULATOR_HOST = process.env.FIREBASE_AUTH_EMULATOR_HOST
   static readonly FIREBASE_FIRESTORE_EMULATOR_HOST = process.env.FIREBASE_FIRESTORE_EMULATOR_HOST
 }

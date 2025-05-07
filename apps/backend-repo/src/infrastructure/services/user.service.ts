@@ -1,6 +1,6 @@
 import { StatusCodes as status } from 'http-status-codes'
 import { isJSON } from 'class-validator'
-import { Injectable, Inject, CreateUserDTO, ApiResponse, apiResponse, QueryUserDTO, ESortQuery, ParamsUserIdDTO, UpdateUserDTO } from 'pkg-monorepo'
+import { CreateUserDTO, ApiResponse, apiResponse, QueryUserDTO, ESortQuery, ParamsUserIdDTO, UpdateUserDTO, Injectable, Inject } from 'pkg-monorepo'
 
 import { UserRepository } from '~/infrastructure/repositories/user.repositorie'
 import { EntityUser } from '~/infrastructure/entities/user.entity'
@@ -24,6 +24,7 @@ export class UserService {
         { key: 'email', operator: '==', value: body.totalAverageWeightRatings },
         { key: 'email', operator: '==', value: body.numberOfRents },
       ])
+
       if (checkUserExist) throw apiResponse({ stat_code: status.CONFLICT, error: 'User already exist' })
 
       const createUser: FirebaseFirestore.DocumentData = await this.userRepository.create(body)

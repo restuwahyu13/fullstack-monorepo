@@ -1,4 +1,4 @@
-import { Container, Injectable } from '~/common/helpers/helper.di'
+import { Injectable, Container } from '~/common/helpers/helper.di'
 
 @Injectable()
 export class UserMetadata {

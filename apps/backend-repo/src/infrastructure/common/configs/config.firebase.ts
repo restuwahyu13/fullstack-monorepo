@@ -1,27 +1,26 @@
 import firebase from 'firebase-admin'
+import { Auth } from 'firebase-admin/auth'
+import { Firestore } from 'firebase-admin/firestore'
 import { Injectable } from 'pkg-monorepo'
 
+import firebaseConfig from '~/infrastructure/common/configs/firebase.json'
 import { Environment } from '~/infrastructure/common/configs/config.env'
 
 @Injectable()
 export class Firebase {
   private app: firebase.app.App
-  private _firestore: FirebaseFirestore.Firestore | null = null
+  private _firestore: Firestore | null = null
 
   constructor() {
     this.app = firebase.initializeApp({
       projectId: Environment.FIREBASE_CERT_PROJECT_ID,
-      credential: firebase.credential.cert({
-        projectId: Environment.FIREBASE_CERT_PROJECT_ID,
-        privateKey: `-----BEGIN PRIVATE KEY-----${Environment.FIREBASE_CERT_PRIVATE_KEY.replace(/\\n/g, '\n')}-----END PRIVATE KEY-----\n`,
-        clientEmail: Environment.FIREBASE_CERT_CLIENT_EMAIL,
-      }),
+      databaseURL: Environment.FIREBASE_DB_URL,
+      credential: firebase.credential.cert(firebaseConfig as any),
     })
   }
 
-  firestore(): FirebaseFirestore.Firestore {
+  firestore(): Firestore {
     if (this._firestore) return this._firestore
-
     const firestore = this.app.firestore()
 
     if (Environment.FIREBASE_FIRESTORE_EMULATOR_HOST) {
@@ -36,7 +35,7 @@ export class Firebase {
     return firestore
   }
 
-  auth(): firebase.auth.Auth {
+  auth(): Auth {
     return this.app.auth()
   }
 }

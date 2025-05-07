@@ -1,13 +1,21 @@
 NPM:=@npm
 COMPOSE:=@docker-compose
 
-.PHONY: install
-install:
+.PHONY: i
+i:
 	${NPM} i -V
 
 .PHONY: build
 build:
 	${NPM} run build
+
+.PHONY: start
+start:
+	${NPM} run start
+
+.PHONY: runtime
+runtime:
+	${NPM} run runtime
 
 .PHONY: dev
 dev:

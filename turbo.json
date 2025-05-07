@@ -15,6 +15,11 @@
 			"dependsOn": ["^start"],
 			"persistent": true,
 			"cache": false
+		},
+		"runtime": {
+			"dependsOn": ["^runtime"],
+			"persistent": true,
+			"cache": false
 		}
 	},
 	"envMode": "loose",

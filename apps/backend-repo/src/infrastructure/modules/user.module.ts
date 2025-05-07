@@ -1,12 +1,9 @@
-import { DependencyContainer } from 'tsyringe'
-import { Injectable, Module, UserMetadata } from 'pkg-monorepo'
+import { UserMetadata, DependencyContainer, Injectable, Module } from 'pkg-monorepo'
 
 import { UserService } from '~/infrastructure/services/user.service'
 import { UserUsecase } from '~/usecases/user.usecase'
 import { UserController } from '~/infrastructure/controllers/user.controller'
 import { UserRoute } from '~/infrastructure/routes/user.route'
-import { UserRepository } from '~/infrastructure/repositories/user.repositorie'
-
 import { AuthMiddleware } from '~/infrastructure/common/middlewares/middleware.auth'
 import { ValidatorMiddleware } from '~/infrastructure/common/middlewares/middleware.validator'
 
@@ -19,10 +16,6 @@ import { ValidatorMiddleware } from '~/infrastructure/common/middlewares/middlew
     useFactory(dc: DependencyContainer) {
       return dc.resolve(UserRoute).main()
     },
-  },
-  {
-    token: 'UserRepository',
-    useClass: UserRepository,
   },
   {
     token: 'UserMetadata',

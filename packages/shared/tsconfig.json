@@ -1,11 +1,11 @@
 {
 	"compilerOptions": {
-		"baseUrl": "shared",
+		"baseUrl": "src",
 		"outDir": "dist",
 		"module": "NodeNext",
-		"moduleResolution": "nodenext",
+		"moduleResolution": "NodeNext",
 		"moduleDetection": "auto",
-		"target": "ES2021",
+		"target": "ESNext",
 		"typeRoots": ["node_modules/@types/"],
 		"paths": {
 			"*": ["node_modules/"],
@@ -28,5 +28,6 @@
 		"noImplicitAny": false,
 		"noImplicitReturns": false
 	},
-	"include": ["shared/**/*.ts"]
+	"include": ["src/**/*.ts"],
+	"exclude": ["dist", "node_modules"]
 }

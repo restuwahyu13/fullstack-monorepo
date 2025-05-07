@@ -10,10 +10,12 @@ import compression from 'compression'
 import zlib from 'zlib'
 import hpp from 'hpp'
 import consola from 'consola'
-import { apiResponse, Container, GracefulShutdown, Injectable } from 'pkg-monorepo'
+import firebase from 'firebase-admin'
+import { apiResponse, GracefulShutdown, Injectable, Container } from 'pkg-monorepo'
 
 import { AppModule } from '~/module.app'
 import { Environment } from '~/infrastructure/common/configs/config.env'
+import { Firebase } from './infrastructure/common/configs/config.firebase'
 
 @Injectable()
 class App {
@@ -31,6 +33,11 @@ class App {
     this.app.enable('trust proxy')
     this.app.disable('x-powered-by')
     Container.resolve<AppModule>(AppModule)
+  }
+
+  private connection(): void {
+    const datasource: Firebase = Container.resolve('Firebase')
+    Container.registerInstance('FirebaseConnection', datasource)
   }
 
   private middleware(): void {
@@ -103,6 +110,7 @@ class App {
   public async main(): Promise<void> {
     try {
       this.config()
+      this.connection()
       this.middleware()
       this.route()
       this.globalRoute()

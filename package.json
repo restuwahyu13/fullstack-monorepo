@@ -5,10 +5,11 @@
 	"description": "Root monorepo",
 	"scripts": {
 		"build": "turbo run build",
+		"start": "turbo run start",
+		"runtime": "turbo run runtime",
 		"dev": "turbo run dev --parallel",
 		"lint": "turbo run lint",
-		"check-types": "turbo run check-types",
-		"format": "prettier --write \"**/*.{ts,tsx,md}\""
+		"check": "turbo run check-types"
 	},
 	"workspaces": [
 		"apps/*",
@@ -33,6 +34,6 @@
 	},
 	"packageManager": "npm@10.9.2",
 	"devDependencies": {
-		"turbo": "latest"
+		"turbo": "^2.5.3"
 	}
 }

@@ -1,14 +1,14 @@
-import { DecodedIdToken, UserRecord } from 'firebase-admin/auth'
-import { DocumentData } from 'firebase-admin/firestore'
-import { Injectable, Inject, logger, QueryUserDTO, CreateUserDTO, ParamsUserIdDTO, UpdateUserDTO } from 'pkg-monorepo'
+import { Auth, DecodedIdToken, UserRecord } from 'firebase-admin/auth'
+import { DocumentData, Firestore } from 'firebase-admin/firestore'
+import { QueryUserDTO, CreateUserDTO, ParamsUserIdDTO, UpdateUserDTO, Injectable, Inject, logger } from 'pkg-monorepo'
 
-import { Firebase } from '~/infrastructure/common/configs/config.firebase'
 import { EntityUser } from '~/infrastructure/entities/user.entity'
+import { Firebase } from '~/infrastructure/common/configs/config.firebase'
 
 @Injectable()
 export class UserRepository {
   constructor(
-    @Inject('Firebase')
+    @Inject('FirebaseConnection')
     private readonly firebase: Firebase,
   ) {}
 
@@ -79,12 +79,8 @@ export class UserRepository {
       let collection: FirebaseFirestore.Query = firestore.collection('users')
 
       if (query?.filter) {
-        if (query?.filter?.totalAverageWeightRatings) {
-          collection = collection.where('totalAverageWeightRatings', '==', query.filter.totalAverageWeightRatings)
-        }
-        if (query?.filter?.numberOfRents) {
-          collection = collection.where('numberOfRents', '==', +query.filter.numberOfRents)
-        }
+        if (query?.filter?.totalAverageWeightRatings) collection = collection.where('totalAverageWeightRatings', '==', query.filter.totalAverageWeightRatings)
+        if (query?.filter?.numberOfRents) collection = collection.where('numberOfRents', '==', +query.filter.numberOfRents)
       } else if (query?.search) {
         collection = collection.where('totalAverageWeightRatings', '==', query.search)
         collection = collection.where('numberOfRents', '==', query.search)

@@ -2,8 +2,7 @@ module.exports = {
   apps: [
     {
       name: 'backend-monorepo',
-      script: 'npm',
-      args: 'start',
+      script: 'dist/app.js',
       watch: false,
       exec_mode: 'cluster',
       instances: 'max',

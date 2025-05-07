@@ -3,7 +3,7 @@
  */
 
 export { apiResponse, ApiResponse } from '~/common/helpers/helper.apiResponse'
-export { Container, Controller, Delay, Inject, InjectAll, Injectable, Module, Router, InjectTransform, Middleware, Route, Service } from '~/common/helpers/helper.di'
+export { Container, Controller, Delay, Inject, InjectAll, Injectable, Module, Router, InjectTransform, Middleware, Route, Service, DependencyContainer } from '~/common/helpers/helper.di'
 export { BackendError } from '~/common/helpers/helper.error'
 export { GracefulShutdown } from '~/common/helpers/helper.gracefulShutdown'
 export { logger } from '~/common/helpers/helper.logger'

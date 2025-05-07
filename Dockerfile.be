@@ -21,4 +21,4 @@ RUN rm -rf node_modules .~/.npm \
     && npm run build
 
 EXPOSE 4000
-CMD ["pnpm", "turbo", "run", "runtime" , "--filter=backend-repo"]
+CMD ["pnpm", "turbo", "run", "runtime" , "-F=backend-repo"]

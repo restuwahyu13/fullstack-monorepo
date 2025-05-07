@@ -4,8 +4,8 @@ import { JwtPayload } from 'jsonwebtoken'
 
 import { ISignatureMetadata } from '~/libs/lib.jwt'
 import { Redis } from '~/libs/lib.redis'
-import { apiResponse } from '~/helpers/helper.apiResponse'
-import { Environment } from '~/configs/config.env'
+import { apiResponse } from '~/infrastructure/common/helpers/helper.apiResponse'
+import { Environment } from '~/infrastructure/common/configs/config.env'
 
 export class Jose {
   private redis: InstanceType<typeof Redis> = new Redis()

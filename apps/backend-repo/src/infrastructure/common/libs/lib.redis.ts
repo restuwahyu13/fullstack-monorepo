@@ -1,7 +1,7 @@
 import IORedis from 'ioredis'
-import { Environment } from '~/configs/config.env'
-import { apiResponse } from '~/helpers/helper.apiResponse'
-import { Injectable } from '~/helpers/helper.di'
+import { Environment } from '~/infrastructure/common/configs/config.env'
+import { apiResponse } from '~/infrastructure/common/helpers/helper.apiResponse'
+import { Injectable } from '~/infrastructure/common/helpers/helper.di'
 
 @Injectable()
 export class Redis {

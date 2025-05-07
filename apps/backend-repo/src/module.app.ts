@@ -1,6 +1,6 @@
-import { Injectable, Module } from '~/helpers/helper.di'
-import { Firebase } from '~/configs/config.firebase'
-import { UserModule } from '~/modules/module.user'
+import { Injectable, Module } from '~/infrastructure/common/helpers/helper.di'
+import { Firebase } from '~/infrastructure/common/configs/config.firebase'
+import { UserModule } from '~/infrastructure/modules/user.module'
 
 @Module([
   {

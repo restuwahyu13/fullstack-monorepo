@@ -4,4 +4,6 @@ export interface IUser {
 	numberOfRents: number
 	recentlyActive: number
 	highPriority: number
+	created_time: Date
+	updated_time: Date
 }

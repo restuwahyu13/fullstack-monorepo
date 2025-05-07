@@ -1,11 +1,12 @@
 import firebase from 'firebase-admin'
 
-import { Environment } from '~/configs/config.env'
-import { Injectable } from '~/helpers/helper.di'
+import { Environment } from '~/infrastructure/common/configs/config.env'
+import { Injectable } from '~/infrastructure/common/helpers/helper.di'
 
 @Injectable()
 export class Firebase {
   private app: firebase.app.App
+  private _firestore: FirebaseFirestore.Firestore | null = null
 
   constructor() {
     this.app = firebase.initializeApp({
@@ -19,12 +20,19 @@ export class Firebase {
   }
 
   firestore(): FirebaseFirestore.Firestore {
-    const firestore: FirebaseFirestore.Firestore = this.app.firestore()
+    if (this._firestore) return this._firestore
 
-    if (Environment.NODE_ENV === 'development') {
-      firestore.settings({ host: Environment.FIREBASE_AUTH_EMULATOR_HOST, ssl: false })
+    const firestore = this.app.firestore()
+
+    if (Environment.FIREBASE_FIRESTORE_EMULATOR_HOST) {
+      firestore.settings({
+        host: Environment.FIREBASE_FIRESTORE_EMULATOR_HOST,
+        ssl: false,
+        ignoreUndefinedProperties: true,
+      })
     }
 
+    this._firestore = firestore
     return firestore
   }
 

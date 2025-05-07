@@ -1,12 +1,11 @@
-import { app } from 'firebase-admin'
 import { DecodedIdToken, UserRecord } from 'firebase-admin/auth'
 import { DocumentData } from 'firebase-admin/firestore'
 
-import { Inject, Injectable } from '~/helpers/helper.di'
-import { Firebase } from '~/configs/config.firebase'
-import { logger } from '~/helpers/helper.logger'
-import { CreateUserDTO, ParamsUserIdDTO, UpdateUserDTO } from '~/dtos/dto.user'
-import { Environment } from '~/configs/config.env'
+import { Inject, Injectable } from '~/infrastructure/common/helpers/helper.di'
+import { Firebase } from '~/infrastructure/common/configs/config.firebase'
+import { logger } from '~/infrastructure/common/helpers/helper.logger'
+import { EntityUser } from '~/infrastructure/entities/user.entity'
+import { CreateUserDTO, ParamsUserIdDTO, UpdateUserDTO } from '~/domain/dtos/user.dto'
 
 @Injectable()
 export class UserRepository {
@@ -42,7 +41,7 @@ export class UserRepository {
     }
   }
 
-  async findOne(options: Record<string, any>[]): Promise<DocumentData> {
+  async findOne(options: Record<string, any>[]): Promise<EntityUser> {
     try {
       const firestore: FirebaseFirestore.Firestore = this.firebase.firestore()
       const collection: FirebaseFirestore.CollectionReference = firestore.collection('users')
@@ -53,37 +52,52 @@ export class UserRepository {
         }
       }
 
-      const res: FirebaseFirestore.QuerySnapshot<DocumentData> = await collection.get()
-      return res.docs.find((doc) => doc)
+      const res: FirebaseFirestore.DocumentSnapshot = await collection.doc().get()
+      return res.data() as any
     } catch (e: any) {
       logger(e, 'error')
       return undefined
     }
   }
 
-  async findById(id: string): Promise<DocumentData> {
+  async findById(id: string): Promise<EntityUser> {
     try {
       const firestore: FirebaseFirestore.Firestore = this.firebase.firestore()
       const collection: FirebaseFirestore.CollectionReference = firestore.collection('users')
 
-      const res: FirebaseFirestore.QuerySnapshot<DocumentData> = await collection.where('id', '==', id).get()
-      return res.docs.find((doc) => doc)
+      const res: FirebaseFirestore.DocumentSnapshot = await collection.doc(id).get()
+      return res.data() as any
     } catch (e: any) {
       logger(e, 'error')
       return undefined
     }
   }
 
-  async findAll(): Promise<DocumentData[]> {
+  async findAll(): Promise<EntityUser[]> {
+    let records: Record<string, any>[] = []
+
     try {
       const firestore: FirebaseFirestore.Firestore = this.firebase.firestore()
       const collection: FirebaseFirestore.CollectionReference = firestore.collection('users')
 
       const res: FirebaseFirestore.QuerySnapshot<DocumentData> = await collection.get()
-      return res.docs.map((doc: DocumentData) => doc)
+      res.forEach((doc: FirebaseFirestore.QueryDocumentSnapshot<DocumentData, DocumentData>) => {
+        if (doc) {
+          records.push({
+            id: doc.id,
+            ...doc.data(),
+            created_time: doc.createTime.toDate(),
+            updated_time: doc.updateTime.toDate(),
+          })
+        }
+      })
+
+      return records as any
     } catch (e: any) {
       logger(e, 'error')
       return undefined
+    } finally {
+      records = []
     }
   }
 
@@ -97,14 +111,10 @@ export class UserRepository {
     }
   }
 
-  update(id: ParamsUserIdDTO, body: UpdateUserDTO): Promise<FirebaseFirestore.WriteResult> {
+  update(param: ParamsUserIdDTO, body: UpdateUserDTO): Promise<FirebaseFirestore.WriteResult> {
     try {
       const firestore: FirebaseFirestore.Firestore = this.firebase.firestore()
-
-      const collection = firestore.collection('users')
-      collection.where('id', '==', id)
-
-      return collection.doc().set(body)
+      return firestore.collection('users').doc(param.id).set(body)
     } catch (e: any) {
       logger(e, 'error')
       return undefined

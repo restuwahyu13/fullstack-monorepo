@@ -3,8 +3,8 @@ import { Socket } from 'node:net'
 import consola from 'consola'
 import { Express } from 'express'
 
-import { Environment } from '~/configs/config.env'
-import { MultiThread } from '~/helpers/helper.multiThread'
+import { Environment } from '~/infrastructure/common/configs/config.env'
+import { MultiThread } from '~/infrastructure/common/helpers/helper.multiThread'
 
 export class GracefulShutdown {
   private multiThread: MultiThread

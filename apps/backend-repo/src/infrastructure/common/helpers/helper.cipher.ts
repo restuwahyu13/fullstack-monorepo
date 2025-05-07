@@ -1,5 +1,5 @@
 import crypto from 'node:crypto'
-import { apiResponse } from '~/helpers/helper.apiResponse'
+import { apiResponse } from '~/infrastructure/common/helpers/helper.apiResponse'
 
 export class Cipher {
   static base64Encode(plainText: string): string {

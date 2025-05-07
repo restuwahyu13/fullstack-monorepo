@@ -1,11 +1,11 @@
 import { StatusCodes as status } from 'http-status-codes'
-import { FirebaseAuthError, UserRecord } from 'firebase-admin/auth'
 
-import { Inject, Injectable } from '~/helpers/helper.di'
-import { ApiResponse, apiResponse } from '~/helpers/helper.apiResponse'
-import { UserMetadata } from '~/helpers/helper.userMetadata'
-import { UserRepository } from '~/repositories/repository.user'
-import { CreateUserDTO, ParamsUserIdDTO, UpdateUserDTO } from '~/dtos/dto.user'
+import { Inject, Injectable } from '~/infrastructure/common/helpers/helper.di'
+import { ApiResponse, apiResponse } from '~/infrastructure/common/helpers/helper.apiResponse'
+import { UserMetadata } from '~/infrastructure/common/helpers/helper.userMetadata'
+import { UserRepository } from '~/infrastructure/repositories/user.repositorie'
+import { EntityUser } from '~/infrastructure/entities/user.entity'
+import { CreateUserDTO, ParamsUserIdDTO, UpdateUserDTO } from '~/domain/dtos/user.dto'
 
 @Injectable()
 export class UserService {
@@ -24,10 +24,16 @@ export class UserService {
       const calculateHighPriority: number = Math.ceil(parseFloat(body.totalAverageWeightRatings)) + body.numberOfRents + body.recentlyActive
       body.highPriority = calculateHighPriority
 
+      const checkUserExist: EntityUser = await this.userRepository.findOne([
+        { key: 'email', operator: '==', value: body.totalAverageWeightRatings },
+        { key: 'email', operator: '==', value: body.numberOfRents },
+      ])
+      if (checkUserExist) throw apiResponse({ stat_code: status.CONFLICT, error: 'User already exist' })
+
       const createUser: FirebaseFirestore.DocumentData = await this.userRepository.create(body)
       if (!createUser) throw apiResponse({ stat_code: status.PRECONDITION_FAILED, error: 'Create user failed' })
 
-      return apiResponse({ stat_code: status.CREATED, message: 'Create user success', data: createUser })
+      return apiResponse({ stat_code: status.CREATED, message: 'Create user success' })
     } catch (e: any) {
       throw apiResponse(e)
     }
@@ -35,16 +41,18 @@ export class UserService {
 
   async findAllUser(): Promise<ApiResponse> {
     try {
-      const getAllUser: FirebaseFirestore.DocumentData = await this.userRepository.findAll()
+      const getAllUser: EntityUser[] = await this.userRepository.findAll()
+      if (!getAllUser) apiResponse({ stat_code: status.OK, message: 'Success', data: [] })
+
       return apiResponse({ stat_code: status.OK, message: 'Success', data: getAllUser })
     } catch (e: any) {
       throw apiResponse(e)
     }
   }
 
-  async findById(params: ParamsUserIdDTO): Promise<ApiResponse> {
+  async findUserById(params: ParamsUserIdDTO): Promise<ApiResponse> {
     try {
-      const getUser: FirebaseFirestore.DocumentData = await this.userRepository.findById(params.id)
+      const getUser: EntityUser = await this.userRepository.findById(params.id)
       if (!getUser) throw apiResponse({ stat_code: status.NOT_FOUND, error: `User ${params.id} not found` })
 
       return apiResponse({ stat_code: status.OK, message: 'Success', data: getUser })
@@ -53,10 +61,16 @@ export class UserService {
     }
   }
 
-  async updateById(params: ParamsUserIdDTO, body: UpdateUserDTO): Promise<ApiResponse> {
+  async updateUserById(params: ParamsUserIdDTO, body: UpdateUserDTO): Promise<ApiResponse> {
     try {
-      const getUser: FirebaseFirestore.DocumentData = await this.userRepository.findById(params.id)
+      const getUser: EntityUser = await this.userRepository.findById(params.id)
       if (!getUser) throw apiResponse({ stat_code: status.NOT_FOUND, error: `User ${params.id} not found` })
+
+      const recentlyActive: number = Date.now()
+      body.recentlyActive = recentlyActive
+
+      const calculateHighPriority: number = Math.ceil(parseFloat(body.totalAverageWeightRatings)) + body.numberOfRents + body.recentlyActive
+      body.highPriority = calculateHighPriority
 
       const updateUser: FirebaseFirestore.DocumentData = await this.userRepository.update(params, body)
       if (!updateUser) throw apiResponse({ stat_code: status.PRECONDITION_FAILED, error: 'Update user failed' })

@@ -1,5 +1,5 @@
 import { Request } from 'express'
-import { Injectable, Container } from '~/helpers//helper.di'
+import { Injectable, Container } from '~/infrastructure/common/helpers/helper.di'
 
 @Injectable()
 export class RequestMetadata {

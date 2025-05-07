@@ -1,22 +1,22 @@
 import { NextFunction, Request, RequestHandler, Response } from 'express'
 import { OutgoingMessage } from 'node:http'
 
-import { ApiResponse, apiResponse } from '~/helpers/helper.apiResponse'
-import { Inject, Injectable } from '~/helpers/helper.di'
-import { rawParser } from '~/helpers/helper.rawParser'
-import { UserService } from '~/services/service.user'
+import { ApiResponse, apiResponse } from '~/infrastructure/common/helpers/helper.apiResponse'
+import { Inject, Injectable } from '~/infrastructure/common/helpers/helper.di'
+import { rawParser } from '~/infrastructure/common/helpers/helper.rawParser'
+import { UserUsecase } from '~/usecases/user.usecase'
 
 @Injectable()
 export class UserController {
   constructor(
-    @Inject('UserService')
-    private readonly service: UserService,
+    @Inject('UserUsecase')
+    private readonly usecase: UserUsecase,
   ) {}
 
   createUser(): RequestHandler {
     return async (req: Request, res: Response, _next: NextFunction): Promise<OutgoingMessage> => {
       try {
-        const service: ApiResponse = await this.service.createUser(rawParser(req.body))
+        const service: ApiResponse = await this.usecase.createUser(rawParser(req.body))
         return apiResponse(service, res)
       } catch (e: any) {
         return apiResponse(e, res)
@@ -27,7 +27,7 @@ export class UserController {
   findAllUser(): RequestHandler {
     return async (req: Request, res: Response, _next: NextFunction): Promise<OutgoingMessage> => {
       try {
-        const service: ApiResponse = await this.service.findAllUser()
+        const service: ApiResponse = await this.usecase.findAllUser()
         return apiResponse(service, res)
       } catch (e: any) {
         return apiResponse(e, res)
@@ -35,10 +35,10 @@ export class UserController {
     }
   }
 
-  findById(): RequestHandler {
+  findUserById(): RequestHandler {
     return async (req: Request, res: Response, _next: NextFunction): Promise<OutgoingMessage> => {
       try {
-        const service: ApiResponse = await this.service.findById(req.params as any)
+        const service: ApiResponse = await this.usecase.findUserById(req.params as any)
         return apiResponse(service, res)
       } catch (e: any) {
         return apiResponse(e, res)
@@ -46,10 +46,10 @@ export class UserController {
     }
   }
 
-  updateById(): RequestHandler {
+  updateUserById(): RequestHandler {
     return async (req: Request, res: Response, _next: NextFunction): Promise<OutgoingMessage> => {
       try {
-        const service: ApiResponse = await this.service.updateById(req.params as any, rawParser(req.body))
+        const service: ApiResponse = await this.usecase.updateUserById(req.params as any, rawParser(req.body))
         return apiResponse(service, res)
       } catch (e: any) {
         return apiResponse(e, res)

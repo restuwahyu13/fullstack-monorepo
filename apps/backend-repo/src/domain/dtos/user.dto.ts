@@ -1,4 +1,3 @@
-// import { IUser } from '@shared'
 import { IsBase64, IsDecimal, IsNotEmpty, IsNumber, IsOptional } from 'class-validator'
 
 export class ParamsUserIdDTO {
@@ -25,7 +24,7 @@ export class CreateUserDTO {
 
 export class UpdateUserDTO {
   @IsDecimal({ force_decimal: true })
-  totalAverageWeightRatings: number
+  totalAverageWeightRatings: string
 
   @IsNumber({ allowInfinity: false, allowNaN: false })
   numberOfRents: number

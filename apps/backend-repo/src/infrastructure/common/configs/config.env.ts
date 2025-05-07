@@ -25,4 +25,5 @@ export class Environment {
   static readonly FIREBASE_CERT_UNIVERSE_DOMAIN = process.env.FIREBASE_CERT_UNIVERSE_DOMAIN
   static readonly FIREBASE_EMULATOR_HOST = process.env.FIREBASE_EMULATOR_HOST === 'true' ? true : false
   static readonly FIREBASE_AUTH_EMULATOR_HOST = process.env.FIREBASE_AUTH_EMULATOR_HOST
+  static readonly FIREBASE_FIRESTORE_EMULATOR_HOST = process.env.FIREBASE_FIRESTORE_EMULATOR_HOST
 }

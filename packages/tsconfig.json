@@ -1,0 +1,32 @@
+{
+	"compilerOptions": {
+		"baseUrl": "shared",
+		"outDir": "dist",
+		"module": "NodeNext",
+		"moduleResolution": "nodenext",
+		"moduleDetection": "auto",
+		"target": "ES2021",
+		"typeRoots": ["node_modules/@types/"],
+		"paths": {
+			"*": ["node_modules/"],
+			"~/*": ["*"]
+		},
+		"strict": true,
+		"alwaysStrict": true,
+		"esModuleInterop": true,
+		"importHelpers": true,
+		"skipLibCheck": true,
+		"downlevelIteration": true,
+		"allowSyntheticDefaultImports": true,
+		"noUnusedParameters": true,
+		"noUnusedLocals": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"removeComments": true,
+		"declaration": true,
+		"strictNullChecks": false,
+		"noImplicitAny": false,
+		"noImplicitReturns": false
+	},
+	"include": ["shared/**/*.ts"]
+}

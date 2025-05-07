@@ -12,7 +12,7 @@
 	},
 	"workspaces": [
 		"apps/*",
-		"shared/*"
+		"packages/*"
 	],
 	"author": {
 		"name": "Restu Wahyu Saputra",
@@ -34,8 +34,5 @@
 	"packageManager": "npm@10.9.2",
 	"devDependencies": {
 		"turbo": "latest"
-	},
-	"dependencies": {
-		"@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector"
 	}
 }

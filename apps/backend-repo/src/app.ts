@@ -10,12 +10,10 @@ import compression from 'compression'
 import zlib from 'zlib'
 import hpp from 'hpp'
 import consola from 'consola'
+import { apiResponse, Container, GracefulShutdown, Injectable } from 'pkg-monorepo'
 
 import { AppModule } from '~/module.app'
-import { Container, Injectable } from '~/infrastructure/common/helpers/helper.di'
 import { Environment } from '~/infrastructure/common/configs/config.env'
-import { apiResponse } from '~/infrastructure/common/helpers/helper.apiResponse'
-import { GracefulShutdown } from '~/infrastructure/common/helpers/helper.gracefulShutdown'
 
 @Injectable()
 class App {
@@ -25,7 +23,7 @@ class App {
 
   constructor() {
     this.app = express()
-    this.server = new GracefulShutdown()
+    this.server = new GracefulShutdown(Environment.NODE_ENV, Environment.PORT, Environment.SINGLE_THREAD)
     this.version = '/api/v1'
   }
 

@@ -1,7 +1,7 @@
 import firebase from 'firebase-admin'
+import { Injectable } from 'pkg-monorepo'
 
 import { Environment } from '~/infrastructure/common/configs/config.env'
-import { Injectable } from '~/infrastructure/common/helpers/helper.di'
 
 @Injectable()
 export class Firebase {

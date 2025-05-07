@@ -1,8 +1,8 @@
-import { Inject, Route, Router } from '~/infrastructure/common/helpers/helper.di'
+import { Router, Route, Inject, CreateUserDTO, ParamsUserIdDTO, UpdateUserDTO } from 'pkg-monorepo'
+
 import { UserController } from '~/infrastructure/controllers/user.controller'
 import { ValidatorMiddleware } from '~/infrastructure/common/middlewares/middleware.validator'
 import { AuthMiddleware } from '~/infrastructure/common/middlewares/middleware.auth'
-import { CreateUserDTO, ParamsUserIdDTO, UpdateUserDTO } from '~/domain/dtos/user.dto'
 
 @Route()
 export class UserRoute {

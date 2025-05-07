@@ -1,12 +1,12 @@
 import { DependencyContainer } from 'tsyringe'
-import { Injectable, Module } from '~/infrastructure/common/helpers/helper.di'
+import { Injectable, Module, UserMetadata } from 'pkg-monorepo'
 
 import { UserService } from '~/infrastructure/services/user.service'
 import { UserUsecase } from '~/usecases/user.usecase'
 import { UserController } from '~/infrastructure/controllers/user.controller'
 import { UserRoute } from '~/infrastructure/routes/user.route'
 import { UserRepository } from '~/infrastructure/repositories/user.repositorie'
-import { UserMetadata } from '~/infrastructure/common/helpers/helper.userMetadata'
+
 import { AuthMiddleware } from '~/infrastructure/common/middlewares/middleware.auth'
 import { ValidatorMiddleware } from '~/infrastructure/common/middlewares/middleware.validator'
 

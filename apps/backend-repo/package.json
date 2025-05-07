@@ -31,8 +31,6 @@
     "npm": ">= 10.x.x"
   },
   "dependencies": {
-    "class-transformer": "^0.5.1",
-    "class-validator": "^0.14.1",
     "compression": "^1.7.5",
     "consola": "^2.15.3",
     "cors": "^2.8.5",
@@ -43,20 +41,15 @@
     "helmet": "^8.0.0",
     "hpp": "^0.2.3",
     "http-status-codes": "^2.3.0",
-    "ioredis": "^5.4.1",
-    "jose": "^5.9.6",
-    "jsonwebtoken": "^9.0.2",
-    "moment-timezone": "^0.5.46",
     "morgan": "^1.10.0",
     "tsyringe": "^4.8.0",
-    "@shared": "link:../shared"
+    "pkg-monorepo": "file:../../packages"
   },
   "devDependencies": {
     "@types/compression": "^1.7.5",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/hpp": "^0.2.6",
-    "@types/jsonwebtoken": "^9.0.7",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.8.7",
     "@typescript-eslint/eslint-plugin": "^8.15.0",

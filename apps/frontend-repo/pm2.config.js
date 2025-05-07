@@ -2,7 +2,7 @@ module.exports = {
 	apps: [
 		{
 			name: 'frontend-monorepo',
-			script: 'npm',
+			script: 'node_modules/.bin/next',
 			args: 'start',
 			watch: false,
 			interpreter: 'none',

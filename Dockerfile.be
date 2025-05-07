@@ -18,7 +18,7 @@ RUN rm -rf node_modules .~/.npm \
     && npm config set fetch-timeout 3600000 \
     && npm i pnpm@latest pm2@latest turbo@latest -g --loglevel verbose \
     && pnpm i --loglevel verbose \
-    && npm run build
+    && pnpm run build
 
 EXPOSE 4000
 CMD ["pnpm", "turbo", "run", "runtime" , "-F=backend-repo"]

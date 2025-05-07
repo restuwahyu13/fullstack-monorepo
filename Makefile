@@ -22,9 +22,13 @@ runtime:
 dev:
 	${NPM} run dev
 
+.PHONY: dcupb
+dcupb:
+	${COMPOSE} up -d --remove-orphans --no-deps --build
+
 .PHONY: dcup
 dcup:
-	${COMPOSE} up -d --remove-orphans --no-deps --build
+	${COMPOSE} up -d --remove-orphans --no-deps
 
 .PHONY: dcdown
 dcdown:

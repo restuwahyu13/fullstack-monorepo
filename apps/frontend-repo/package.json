@@ -33,11 +33,14 @@
 		"@emotion/styled": "^11.14.0",
 		"@mui/material": "^7.1.0",
 		"@reduxjs/toolkit": "^2.8.0",
+		"firebase": "^11.6.1",
 		"next": "15.3.2",
 		"pkg-monorepo": "*",
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0",
-		"react-redux": "^9.2.0"
+		"react-loader-spinner": "^6.1.6",
+		"react-redux": "^9.2.0",
+		"react-toastify": "^11.0.5"
 	},
 	"devDependencies": {
 		"@eslint/eslintrc": "^3.3.1",

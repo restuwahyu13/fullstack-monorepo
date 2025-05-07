@@ -1,6 +1,11 @@
 NPM:=@npm
 PNPM=@pnpm
+DOCKER=@docker
 COMPOSE:=@docker-compose
+
+######################################
+# APP COMMAND TERITORY
+######################################
 
 .PHONY: i
 i:
@@ -22,14 +27,24 @@ runtime:
 dev:
 	${NPM} run dev
 
-.PHONY: dcupb
-dcupb:
-	${COMPOSE} up -d --remove-orphans --no-deps --build
+######################################
+# DOCKER COMMAND TERITORY
+######################################
 
-.PHONY: dcup
-dcup:
+.PHONY: upb
+upb:
+	${DOCKER} build -t fullstack-monorepo:latest --compress .
 	${COMPOSE} up -d --remove-orphans --no-deps
 
-.PHONY: dcdown
-dcdown:
+.PHONY: dob
+dob:
+	${COMPOSE} down
+	${DOCKER} rmi -f fullstack-monorepo:latest
+
+.PHONY: up
+up:
+	${COMPOSE} up -d --remove-orphans --no-deps
+
+.PHONY: do
+do:
 	${COMPOSE} down

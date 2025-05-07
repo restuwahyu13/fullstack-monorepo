@@ -1,16 +1,12 @@
-##############################
-# APP SERVICE ENVIRONMENT
-##############################
 services:
 ##############################
 # API SERVICE ENVIRONMENT
 ##############################
   api:
-    container_name: api-monorepo
+    container_name: api
     restart: always
-    build:
-      context: .
-      dockerfile: Dockerfile.be
+    image: fullstack-monorepo:latest
+    command: ["pnpm", "turbo", "run", "runtime" , "-F=backend-repo"]
     healthcheck:
       test: "env | grep HOME"
       retries: 5
@@ -29,11 +25,10 @@ services:
 # WEB SERVICE ENVIRONMENT
 ##############################
   web:
-    container_name: web-monorepo
+    container_name: web
     restart: always
-    build:
-      context: .
-      dockerfile: Dockerfile.fe
+    image: fullstack-monorepo:latest
+    command: ["pnpm", "turbo", "run", "runtime" , "-F=frontend-repo"]
     healthcheck:
       test: "env | grep HOME"
       retries: 5

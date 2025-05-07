@@ -2,7 +2,7 @@ FROM node:22-alpine
 WORKDIR /app
 
 COPY ./package.json turbo.json pnpm-lock.yaml pnpm-workspace.yaml ./
-COPY ./apps/backend-repo ./apps/backend-repo
+COPY ./apps ./apps/
 COPY ./packages ./packages
 
 RUN apk update \
@@ -19,6 +19,3 @@ RUN rm -rf node_modules .~/.npm \
     && npm i pnpm@latest pm2@latest turbo@latest -g --loglevel verbose \
     && pnpm i --loglevel verbose \
     && pnpm run build
-
-EXPOSE 4000
-CMD ["pnpm", "turbo", "run", "runtime" , "-F=backend-repo"]

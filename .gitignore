@@ -4,6 +4,7 @@
 /node_modules/
 /apps/frontend-repo/node_modules/
 /apps/backend-repo/node_modules/
+/packages/node_modules/
 
 # next.js
 /.next/
@@ -13,30 +14,34 @@ apps/frontend-repo/.next/
 apps/frontend-repo/.cache/
 apps/frontend-repo/.turbo/
 apps/backend-repo/.turbo/
+packages/.turbo/
 
 # ts build
 /dist
-apps/backend-repo/dist/
+/apps/backend-repo/dist/
+/packages/dist/
 
 # misc
 .DS_Store
-apps/frontend-repo/.DS_Store
-apps/backend-repo/.DS_Store
+/apps/frontend-repo/.DS_Store
+/apps/backend-repo/.DS_Store
+/packages/.DS_Store
 
 # debug
 npm-debug.log*
 firebase-debug.log
 firestore-debug.log
-apps/frontend-repo/npm-debug.log*
-apps/backend-repo/npm-debug.log*
+/apps/frontend-repo/npm-debug.log*
+/apps/backend-repo/npm-debug.log*
+/packages/npm-debug.log*
 
 # env files
 /.env
 /.env.*
-apps/frontend-repo/.env
-apps/frontend-repo/.env.*
-apps/backend-repo/.env
-apps/backend-repo/.env.*
+/apps/frontend-repo/.env
+/apps/frontend-repo/.env.*
+/apps/backend-repo/.env
+/apps/backend-repo/.env.*
 
 # typescript
 next-env.d.ts

@@ -1,5 +1,6 @@
 {
 	"$schema": "https://turbo.build/schema.json",
+	"ui": "tui",
 	"tasks": {
 		"build": {
 			"dependsOn": ["^build"],
@@ -17,6 +18,6 @@
 		}
 	},
 	"envMode": "loose",
-	"globalDependencies": [".env.development", "tsconfig.json", "package.json"],
+	"globalDependencies": ["tsconfig.json", "package.json"],
 	"globalEnv": ["NODE_ENV"]
 }

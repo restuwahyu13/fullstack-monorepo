@@ -12,7 +12,10 @@ module.exports = {
 			combine_logs: true,
 			error_file: 'logs/frontend-error.log',
 			out_file: 'logs/frontend-out.log',
-			time: true
+			time: true,
+			env: {
+				NODE_ENV: 'production'
+			}
 		}
 	]
 }

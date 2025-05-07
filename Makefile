@@ -24,7 +24,7 @@ dev:
 
 .PHONY: dcup
 dcup:
-	${COMPOSE} up -d --remove-orphans --no-deps
+	${COMPOSE} up -d --remove-orphans --no-deps --build
 
 .PHONY: dcdown
 dcdown:

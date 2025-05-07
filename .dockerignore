@@ -14,26 +14,26 @@ apps/frontend-repo/.next/
 apps/frontend-repo/.cache/
 apps/frontend-repo/.turbo/
 apps/backend-repo/.turbo/
-packages/.turbo/
+packages/shared/.turbo/
 
 # ts build
 /dist
 /apps/backend-repo/dist/
-/packages/dist/
+/packages/shared/dist/
 
 # misc
 .DS_Store
 /apps/frontend-repo/.DS_Store
 /apps/backend-repo/.DS_Store
-/packages/.DS_Store
+/packages/shared/.DS_Store
 
 # debug
 npm-debug.log*
 firebase-debug.log
 firestore-debug.log
-/apps/frontend-repo/npm-debug.log*
-/apps/backend-repo/npm-debug.log*
-/packages/npm-debug.log*
+/apps/frontend-repo/logs
+/apps/backend-repo/logs
+/packages/shared/logs
 
 # env files
 /.env

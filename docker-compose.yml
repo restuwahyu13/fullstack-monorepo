@@ -21,8 +21,8 @@ services:
     ports:
       - 4000:4000
     volumes:
-      - .:/usr/apps/backend-repo
-      - /usr/apps/backend-repo/node_modules
+      - .:/app
+      - /app/node_modules
     networks:
       - monorepo-networks
 ##############################
@@ -44,8 +44,8 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - .:/usr/apps/frontend-repo
-      - /usr/apps/frontend-repo/node_modules
+      - .:/app
+      - /app/node_modules
     depends_on:
       - api
     networks:

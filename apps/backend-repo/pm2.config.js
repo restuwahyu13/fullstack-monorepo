@@ -13,6 +13,9 @@ module.exports = {
       error_file: 'logs/backend-error.log',
       out_file: 'logs/backend-out.log',
       time: true,
+      env: {
+        NODE_ENV: 'production',
+      },
     },
   ],
 }

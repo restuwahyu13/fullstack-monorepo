@@ -21,4 +21,4 @@ RUN rm -rf node_modules .~/.npm \
     && npm run build
 
 EXPOSE 3000
-CMD npm run runtime
+CMD ["pnpm", "turbo", "run", "runtime" , "--filter=frontend-repo"]

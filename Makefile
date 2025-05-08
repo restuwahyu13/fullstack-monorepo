@@ -27,6 +27,22 @@ runtime:
 dev:
 	${NPM} run dev
 
+.PHONY: fes
+fes:
+	${PNPM} turbo start -F=frontend-repo
+
+.PHONY: bes
+bes:
+	${PNPM} turbo start -F=backend-repo
+
+.PHONY: fed
+fed:
+	${PNPM} turbo run dev -F=frontend-repo
+
+.PHONY: bed
+bed:
+	${PNPM} turbo run dev -F=backend-repo
+
 ######################################
 # DOCKER COMMAND TERITORY
 ######################################

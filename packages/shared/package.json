@@ -3,7 +3,7 @@
 	"private": true,
 	"version": "0.0.1",
 	"description": "Shared package monorepo",
-	"main": "dist",
+	"main": "dist/index.d.ts",
 	"scripts": {
 		"ts-bin:prod": "tsc -P tsconfig.json && tsc-alias",
 		"cleanup": "rimraf dist",
@@ -27,6 +27,7 @@
 		"npm": ">= 10.x.x"
 	},
 	"dependencies": {
+		"axios": "^1.9.0",
 		"class-transformer": "^0.5.1",
 		"class-validator": "^0.14.2",
 		"consola": "^2.15.3",

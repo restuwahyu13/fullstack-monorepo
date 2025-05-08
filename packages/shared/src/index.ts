@@ -2,15 +2,21 @@
  * Helper Shared - Teritory
  */
 
-export { apiResponse, ApiResponse } from '~/common/helpers/helper.apiResponse'
-export { Container, Controller, Delay, Inject, InjectAll, Injectable, Module, Router, InjectTransform, Middleware, Route, Service, DependencyContainer } from '~/common/helpers/helper.di'
-export { BackendError } from '~/common/helpers/helper.error'
-export { GracefulShutdown } from '~/common/helpers/helper.gracefulShutdown'
-export { logger } from '~/common/helpers/helper.logger'
-export { MultiThread } from '~/common/helpers/helper.multiThread'
-export { rawParser } from '~/common/helpers/helper.rawParser'
-export { RequestMetadata } from '~/common/helpers/helper.requestMetadata'
-export { UserMetadata } from '~/common/helpers/helper.userMetadata'
+// export { apiResponse, ApiResponse } from '~/common/helpers/helper.apiResponse'
+// export { Container, Controller, Delay, Inject, InjectAll, Injectable, Module, Router, InjectTransform, Middleware, Route, Service, DependencyContainer } from '~/common/helpers/helper.di'
+// export { BackendError } from '~/common/helpers/helper.error'
+// export { GracefulShutdown } from '~/common/helpers/helper.gracefulShutdown'
+// export { logger } from '~/common/helpers/helper.logger'
+// export { MultiThread } from '~/common/helpers/helper.multiThread'
+// export { rawParser } from '~/common/helpers/helper.rawParser'
+// export { RequestMetadata } from '~/common/helpers/helper.requestMetadata'
+// export { UserMetadata } from '~/common/helpers/helper.userMetadata'
+
+/**
+ * Interface Libs - Teritory
+ */
+
+export { HttpClient } from '~/common/libs/axios.lib'
 
 /**
  * DTO Shared - Teritory
@@ -24,6 +30,7 @@ export { CreateUserDTO, ParamsUserIdDTO, QueryUserDTO, UpdateUserDTO } from '~/d
  */
 
 export { ESortQuery } from '~/domain/enums/common.enum'
+export { HttpClientAdapterType, HttpClientMethod, HttpClientType } from '~/domain/enums/axios.enum'
 
 /**
  * Interface Shared - Teritory

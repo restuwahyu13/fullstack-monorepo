@@ -22,7 +22,7 @@ import { EnvConfig } from '~/infrastructure/common/configs/env.config'
 
 const Login: React.FC<any> = (): React.ReactNode => {
 	const router: AppRouterInstance = useRouter()
-	const disptach: Dispatch = useDispatch()
+	const dispatch: Dispatch = useDispatch()
 
 	const email: string = useSelector((state: Record<string, any>) => state?.auth?.email)
 	const password: string = useSelector((state: Record<string, any>) => state?.auth?.password)
@@ -35,7 +35,7 @@ const Login: React.FC<any> = (): React.ReactNode => {
 		resolver: zodResolver(LoginSchema)
 	})
 
-	const loginAuthMutation = async (data: LoginFormSchema) => disptach(loginActionCreator({ email: data.email, password: data.password }))
+	const loginAuthMutation = async (data: LoginFormSchema) => dispatch(loginActionCreator({ email: data.email, password: data.password }))
 	const authLoginRouter = async () => {
 		try {
 			const firebaseAuth: Auth = FirebaseConfig.auth(EFirebaseType.CLIENT)

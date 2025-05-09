@@ -16,7 +16,7 @@ export class AuthRoute {
   }
 
   main(): Router {
-    this.router.get('/verify', this.auth.use(), this.controller.verifyToken())
+    this.router.get('/verify', [this.auth.use()], this.controller.verifyToken())
 
     return this.router
   }

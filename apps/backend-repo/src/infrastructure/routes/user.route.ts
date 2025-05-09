@@ -21,10 +21,10 @@ export class UserRoute {
   }
 
   main(): Router {
-    this.router.post('/', [this.auth.use, this.validator.use(CreateUserDTO)], this.controller.createUser())
-    this.router.get('/', [this.auth.use], this.controller.findAllUser())
-    this.router.get('/:id', [this.auth.use, this.validator.use(ParamsUserIdDTO)], this.controller.findUserById())
-    this.router.put('/:id', [this.auth.use, this.validator.use(UpdateUserDTO)], this.controller.updateUserById())
+    this.router.post('/', [this.auth.use(), this.validator.use(CreateUserDTO)], this.controller.createUser())
+    this.router.get('/', [this.auth.use()], this.controller.findAllUser())
+    this.router.get('/:id', [this.auth.use(), this.validator.use(ParamsUserIdDTO)], this.controller.findUserById())
+    this.router.put('/:id', [this.auth.use(), this.validator.use(UpdateUserDTO)], this.controller.updateUserById())
 
     return this.router
   }

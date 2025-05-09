@@ -21,7 +21,7 @@ const LoadingScreen = ({ fullScreen = true, type = 'oval', message = 'Loading...
 					}
 					return Math.min(oldProgress + 10, 100)
 				})
-			}, 1500)
+			}, 1000)
 			return () => clearInterval(timer)
 		}
 	}, [type])

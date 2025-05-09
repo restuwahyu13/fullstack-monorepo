@@ -15,6 +15,9 @@ export const actionCreator: any = {
 		if (action.type === ActionType.LOGIN) {
 			state.email = action.payload.email
 			state.password = action.payload.password
+		} else {
+			state.email = ''
+			state.password = ''
 		}
 	}
 }

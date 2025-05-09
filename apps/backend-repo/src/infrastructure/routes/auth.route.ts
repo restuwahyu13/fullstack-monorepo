@@ -1,8 +1,6 @@
-import { VerifyAuthTokenDTO } from 'pkg-monorepo'
-
 import { Inject, Route, Router } from '~/infrastructure/common/helpers/helper.di'
-import { ValidatorMiddleware } from '~/infrastructure/common/middlewares/middleware.validator'
 import { AuthController } from '~/infrastructure/controllers/auth.controller'
+import { AuthMiddleware } from '~/infrastructure/common/middlewares/middleware.auth'
 
 @Route()
 export class AuthRoute {
@@ -11,14 +9,14 @@ export class AuthRoute {
   constructor(
     @Inject('AuthController')
     private readonly controller: AuthController,
-    @Inject('ValidatorMiddleware')
-    private readonly validator: ValidatorMiddleware,
+    @Inject('AuthMiddleware')
+    private readonly auth: AuthMiddleware,
   ) {
     this.router = Router({ strict: true, caseSensitive: true })
   }
 
   main(): Router {
-    this.router.post('/verify', [this.validator.use(VerifyAuthTokenDTO)], this.controller.verifyToken())
+    this.router.get('/verify', this.auth.use(), this.controller.verifyToken())
 
     return this.router
   }

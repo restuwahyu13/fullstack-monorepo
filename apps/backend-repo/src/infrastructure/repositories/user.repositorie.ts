@@ -33,7 +33,7 @@ export class UserRepository {
 
   async verifiedToken(token: string): Promise<DecodedIdToken> {
     try {
-      return this.firebase.auth().verifyIdToken(token)
+      return this.firebase.auth().verifyIdToken(token, true)
     } catch (e: any) {
       logger(e, 'error')
       return undefined

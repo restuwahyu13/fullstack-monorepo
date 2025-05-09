@@ -14,9 +14,9 @@ export class AuthController {
   ) {}
 
   verifyToken(): RequestHandler {
-    return async (req: Request, res: Response, _next: NextFunction): Promise<OutgoingMessage> => {
+    return async (_req: Request, res: Response, _next: NextFunction): Promise<OutgoingMessage> => {
       try {
-        const service: ApiResponse = await this.usecase.verifyToken(rawParser(req.body))
+        const service: ApiResponse = await this.usecase.verifyToken()
         return apiResponse(service, res)
       } catch (e: any) {
         return apiResponse(e, res)

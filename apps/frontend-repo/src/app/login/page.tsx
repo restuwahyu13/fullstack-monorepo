@@ -7,7 +7,7 @@ import { Email, Lock } from '@mui/icons-material'
 import { useMutation } from '@tanstack/react-query'
 import { TailSpin } from 'react-loader-spinner'
 import { useDispatch, useSelector } from 'react-redux'
-import { HttpClient, HttpClientMethod, HttpClientResponse, HttpClientType } from 'pkg-monorepo'
+import { Cookie } from 'pkg-monorepo'
 import { useRouter } from 'next/navigation'
 import { Dispatch } from '@reduxjs/toolkit'
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
@@ -15,10 +15,10 @@ import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.share
 import LoginView from '~/app/login/__view'
 import { LoginFormSchema, LoginSchema } from '~/domains/schemas/auth.schema'
 import { loginActionCreator } from '~/presentation/stores/reducers/auth'
-import { BaseUrlConfig } from '~/infrastructure/common/configs/url.config'
 import { FirebaseConfig } from '~/infrastructure/common/configs/firebase.config'
 import { EFirebaseType } from '~/domains/constants/firebase.constant'
 import { Auth, signInWithEmailAndPassword, UserCredential } from 'firebase/auth'
+import { EnvConfig } from '~/infrastructure/common/configs/env.config'
 
 const Login: React.FC<any> = (): React.ReactNode => {
 	const router: AppRouterInstance = useRouter()
@@ -43,18 +43,8 @@ const Login: React.FC<any> = (): React.ReactNode => {
 			const userCredential: UserCredential = await signInWithEmailAndPassword(firebaseAuth, email, password)
 			if (!userCredential?.user) router.push('/login')
 
-			const token: string = await userCredential.user.getIdToken()
-
-			const res: HttpClientResponse = await HttpClient.request({
-				url: BaseUrlConfig.RTR_LOGIN_URL,
-				method: HttpClientMethod.POST,
-				type: HttpClientType.BODY,
-				data: { email, password },
-				headers: {
-					'X-Request-Token': token
-				}
-			})
-			if (res?.code >= 400 || res?.data?.code >= 400) throw res
+			const token: string = await firebaseAuth.currentUser?.getIdToken()
+			Cookie.set('token', token, { path: '/', sameSite: EnvConfig.NODE_ENV === 'production' ? 'lax' : 'strict', secure: EnvConfig.NODE_ENV === 'production', expires: 3600 })
 
 			router.push('/dashboard')
 		} catch (e: any) {

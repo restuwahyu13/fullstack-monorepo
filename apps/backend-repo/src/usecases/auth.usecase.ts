@@ -11,7 +11,7 @@ export class AuthUsecase {
     private readonly service: AuthService,
   ) {}
 
-  verifyToken(body: VerifyAuthTokenDTO): Promise<ApiResponse> {
-    return this.service.verifyToken(body)
+  verifyToken(): Promise<ApiResponse> {
+    return this.service.verifyToken()
   }
 }

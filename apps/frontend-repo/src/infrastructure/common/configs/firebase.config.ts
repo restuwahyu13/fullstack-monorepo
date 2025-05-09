@@ -1,4 +1,4 @@
-import { FirebaseOptions, FirebaseServerAppSettings, getApps, initializeApp, initializeServerApp } from 'firebase/app'
+import { FirebaseOptions, FirebaseServerAppSettings, initializeApp } from 'firebase/app'
 import { Auth, getAuth } from 'firebase/auth'
 
 import { EFirebaseType } from '~/domains/constants/firebase.constant'
@@ -22,11 +22,9 @@ export class FirebaseConfig {
 		}
 	}
 
-	private static app(type: EFirebaseType) {
+	private static app(_type: EFirebaseType) {
 		const config: { client: FirebaseOptions; server: FirebaseServerAppSettings } = FirebaseConfig.config()
-
-		if (!getApps().length) return type === EFirebaseType.CLIENT ? initializeApp(config.client) : initializeServerApp(config.client, config.server)
-		return getApps()[0]
+		return initializeApp(config.client)
 	}
 
 	static auth(type: EFirebaseType): Auth {

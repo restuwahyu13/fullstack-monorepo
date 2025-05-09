@@ -4,6 +4,7 @@
 
 export { ApplicationError } from '~/common/helpers/helper.error'
 export { logger } from '~/common/helpers/helper.logger'
+export { authBearer, xRequestToken } from '~/common/helpers/helper.customHeader'
 
 /**
  * Interface Libs - Teritory

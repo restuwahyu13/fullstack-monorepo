@@ -13,7 +13,6 @@ export class Firebase {
 
   constructor() {
     this.app = firebase.initializeApp({
-      projectId: Environment.FIREBASE_CERT_PROJECT_ID,
       databaseURL: Environment.FIREBASE_DB_URL,
       credential: firebase.credential.cert(firebaseConfig as any),
     })

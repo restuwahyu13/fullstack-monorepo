@@ -3,8 +3,8 @@ import { DependencyContainer, Injectable, Module } from '~/infrastructure/common
 import { AuthUsecase } from '~/usecases/auth.usecase'
 import { AuthController } from '~/infrastructure/controllers/auth.controller'
 import { AuthService } from '~/infrastructure/services/auth.service'
-import { ValidatorMiddleware } from '~/infrastructure/common/middlewares/middleware.validator'
 import { AuthRoute } from '~/infrastructure/routes/auth.route'
+import { AuthMiddleware } from '~/infrastructure/common/middlewares/middleware.auth'
 
 @Module([
   { token: 'AuthService', useClass: AuthService },
@@ -16,9 +16,10 @@ import { AuthRoute } from '~/infrastructure/routes/auth.route'
       return dc.resolve(AuthRoute).main()
     },
   },
+
   {
-    token: 'ValidatorMiddleware',
-    useClass: ValidatorMiddleware,
+    token: 'AuthMiddleware',
+    useClass: AuthMiddleware,
   },
 ])
 @Injectable()

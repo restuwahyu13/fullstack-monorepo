@@ -29,6 +29,7 @@ const Dashboard = () => {
 		try {
 			const res: Response = await fetch(BaseUrlConfig.RTR_USER_LIST_URL, { headers: xRequestToken(Cookie.get('token')) })
 			const result = await res.json()
+
 			if (result?.code >= 400) {
 				if (result?.code === 401) Cookie.remove('token')
 				throw res
@@ -36,7 +37,7 @@ const Dashboard = () => {
 
 			dispatchList(listActionCreator({ list: result?.data?.data || [] }))
 		} catch (e: any) {
-			throw new Error(e)
+			throw new Error(e?.error)
 		}
 	}, [dispatchList])
 
@@ -75,7 +76,6 @@ const Dashboard = () => {
 		try {
 			const res: Response = await fetch(BaseUrlConfig.RTR_USER_UPDATE_URL, { method: HttpClientMethod.PUT, body: JSON.stringify(update), headers: xRequestToken(Cookie.get('token')) })
 			const result = await res.json()
-			console.log('hahah', result)
 
 			if (result?.code >= 400) {
 				if (result?.code === 401) Cookie.remove('token')
@@ -83,11 +83,11 @@ const Dashboard = () => {
 			}
 			handleClose()
 		} catch (e: any) {
-			throw new Error(e)
+			throw new Error(e?.error)
 		}
 	}
 
-	const { mutate, isPending, error } = useMutation({ mutationFn: updateUserMutation, onSuccess: updateUserRouter })
+	const { mutate, isPending, error } = useMutation({ mutationFn: updateUserMutation, onSuccess: updateUserRouter, onError: (e) => console.error(e) })
 	const onSubmit = (data: UpdateFormSchema) => mutate(data)
 
 	const columns: Record<string, any>[] = [

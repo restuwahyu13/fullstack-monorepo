@@ -1,4 +1,4 @@
-import { IsBase64, IsDecimal, IsNotEmpty, IsNumber, IsOptional } from 'class-validator'
+import { IsBase64, IsNotEmpty, IsNumber, IsOptional, Matches } from 'class-validator'
 import { CommonFilterQueryDTO } from '~/domain/dtos/common.dto'
 
 export class ParamsUserIdDTO {
@@ -12,7 +12,7 @@ export class QueryUserDTO extends CommonFilterQueryDTO {
 }
 
 export class CreateUserDTO {
-	@IsDecimal({ force_decimal: true })
+	@Matches(/^-?\d*\.?\d+$/)
 	totalAverageWeightRatings: string
 
 	@IsNumber({ allowInfinity: false, allowNaN: false })
@@ -28,7 +28,7 @@ export class CreateUserDTO {
 }
 
 export class UpdateUserDTO {
-	@IsDecimal({ force_decimal: true })
+	@Matches(/^-?\d*\.?\d+$/)
 	totalAverageWeightRatings: string
 
 	@IsNumber({ allowInfinity: false, allowNaN: false })
@@ -38,7 +38,7 @@ export class UpdateUserDTO {
 	@IsNumber({ allowInfinity: false, allowNaN: false })
 	recentlyActive: number
 
-	@IsNumber({ allowInfinity: false, allowNaN: false })
 	@IsOptional()
+	@IsNumber({ allowInfinity: false, allowNaN: false })
 	highPriority: number
 }

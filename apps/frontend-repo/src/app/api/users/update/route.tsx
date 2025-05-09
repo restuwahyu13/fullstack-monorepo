@@ -15,7 +15,7 @@ export const PUT = async (req: NextRequest) => {
 			url: `${BaseUrlConfig.USER_URL}/${body?.id}`,
 			method: HttpClientMethod.PUT,
 			type: HttpClientType.BODY,
-			data: body,
+			data: { totalAverageWeightRatings: body.totalAverageWeightRatings, numberOfRents: +body.numberOfRents },
 			headers: authBearer(token)
 		})
 		if (res.code >= 400) throw res

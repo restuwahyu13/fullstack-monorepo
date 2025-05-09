@@ -1,5 +1,5 @@
 import { FilledInputProps, OutlinedInputProps, InputProps, TextFieldVariants, TextFieldProps } from '@mui/material'
-import { FieldErrors, UseFormRegisterReturn } from 'react-hook-form'
+import { Control, FieldErrors, FieldValues, UseFormRegisterReturn } from 'react-hook-form'
 
 export interface IFormInput {
 	name: string
@@ -10,6 +10,7 @@ export interface IFormInput {
 	errors?: FieldErrors<any>
 	error?: Error
 	variant?: TextFieldVariants
+	control?: Control<FieldValues, any, FieldValues>
 }
 
 export interface IFormComponent<T = any> {
@@ -19,4 +20,5 @@ export interface IFormComponent<T = any> {
 	loading?: boolean
 	spinner?: () => React.ReactNode
 	handlerSubmit: (data: T) => void
+	control?: Control<FieldValues, any, FieldValues>
 }

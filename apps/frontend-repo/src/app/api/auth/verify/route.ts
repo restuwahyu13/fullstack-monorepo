@@ -4,8 +4,6 @@ import { HttpClient, HttpClientResponse, authBearer } from 'pkg-monorepo'
 import { BaseUrlConfig } from '~/infrastructure/common/configs/url.config'
 
 export const GET = async (req: NextRequest) => {
-	console.log('VERIFY')
-
 	try {
 		const token: string = req.headers.get('x-request-token') || ''
 		if (!token) return NextResponse.json({ code: 401, error: 'Unauthorized invalid token' })

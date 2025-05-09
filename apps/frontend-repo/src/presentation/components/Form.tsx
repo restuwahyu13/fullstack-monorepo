@@ -20,10 +20,11 @@ const FormComponent: React.FC<any> = (props: IFormComponent): React.ReactNode =>
 							/>
 						</div>
 					))}
-
-					<Button type='submit' variant='contained' color='primary' fullWidth size='large' disabled={props?.loading} sx={{ height: 48, marginTop: 2 }}>
-						{props?.loading ? props.spinner() : props?.text}
-					</Button>
+					{!props?.control && (
+						<Button type='submit' variant='contained' color='primary' fullWidth size='large' disabled={props?.loading} sx={{ height: 48, marginTop: 2 }}>
+							{props?.loading ? props.spinner() : props?.text}
+						</Button>
+					)}
 				</>
 			)}
 		</div>

@@ -42,7 +42,7 @@ export class HttpClient {
 				HttpClient.options.url = `${HttpClient.options.url}?${searchParams.toString()}`
 			}
 
-			HttpClient.create(HttpClient.options)
+			HttpClient.create(options)
 			if (typeof interceptor?.handlerReq === 'function') HttpClient.instance.interceptors.request.use(interceptor.handlerReq)
 			if (typeof interceptor?.handlerRes === 'function') HttpClient.instance.interceptors.response.use(interceptor.handlerRes)
 

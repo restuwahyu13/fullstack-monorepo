@@ -36,9 +36,7 @@
 		"@mui/material": "^7.1.0",
 		"@reduxjs/toolkit": "^2.8.0",
 		"@tanstack/react-query": "^5.75.5",
-		"cookies-next": "^5.1.0",
 		"firebase": "^11.6.1",
-		"js-cookie": "^3.0.5",
 		"next": "15.3.2",
 		"pkg-monorepo": "*",
 		"react": "^19.1.0",
@@ -46,7 +44,6 @@
 		"react-hook-form": "^7.56.3",
 		"react-loader-spinner": "^6.1.6",
 		"react-redux": "^9.2.0",
-		"react-toastify": "^11.0.5",
 		"zod": "^3.24.4"
 	},
 	"devDependencies": {

@@ -1,9 +1,7 @@
-import consola from 'consola'
-
 export const logger = (src: any, type: 'error' | 'info' | 'wanr' | 'log' | 'debug'): void => {
-  switch (type) {
-    case 'error':
-      consola.error(`
+	switch (type) {
+		case 'error':
+			console.error(`
           ==================================
           ======== Error Exception =========
           ==================================
@@ -16,10 +14,10 @@ export const logger = (src: any, type: 'error' | 'info' | 'wanr' | 'log' | 'debu
           ==================================
           ==================================
        `)
-      break
+			break
 
-    case 'debug':
-      consola.debug(`
+		case 'debug':
+			console.debug(`
           ==================================
           ======== Logger Debug =========
           ==================================
@@ -30,10 +28,10 @@ export const logger = (src: any, type: 'error' | 'info' | 'wanr' | 'log' | 'debu
           ==================================
           ==================================
        `)
-      break
+			break
 
-    case 'info':
-      consola.info(`
+		case 'info':
+			console.info(`
           ==================================
           ======== Logger Info =========
           ==================================
@@ -44,10 +42,10 @@ export const logger = (src: any, type: 'error' | 'info' | 'wanr' | 'log' | 'debu
           ==================================
           ==================================
        `)
-      break
+			break
 
-    case 'wanr':
-      consola.warn(`
+		case 'wanr':
+			console.warn(`
           ==================================
           ======== Logger Warn =========
           ==================================
@@ -58,10 +56,10 @@ export const logger = (src: any, type: 'error' | 'info' | 'wanr' | 'log' | 'debu
           ==================================
           ==================================
        `)
-      break
+			break
 
-    default:
-      consola.log(`
+		default:
+			console.log(`
           ==================================
           ======== Logger Log =========
           ==================================
@@ -72,6 +70,6 @@ export const logger = (src: any, type: 'error' | 'info' | 'wanr' | 'log' | 'debu
           ==================================
           ==================================
        `)
-      break
-  }
+			break
+	}
 }

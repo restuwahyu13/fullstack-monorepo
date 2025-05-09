@@ -22,7 +22,6 @@ const nextConfig: NextConfig = {
 	reactStrictMode: process.env.NODE_ENV === 'development' ? true : false,
 	productionBrowserSourceMaps: process.env.NODE_ENV === 'development' ? true : false,
 	experimental: {
-		caseSensitiveRoutes: true,
 		optimizeCss: true,
 		cpus: os.cpus().length / 2
 	},

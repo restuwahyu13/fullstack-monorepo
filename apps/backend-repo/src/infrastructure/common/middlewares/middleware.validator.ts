@@ -13,8 +13,6 @@ export class ValidatorMiddleware {
     return async function (req: Request, res: Response, next: NextFunction): Promise<OutgoingMessage | NextFunction> {
       let property: Record<string, any> = {}
 
-      console.log('xxx', req.body)
-
       property = Object.assign(property, req.body, req.params, req.query)
       const errorsResponse: ValidationError[] = []
 

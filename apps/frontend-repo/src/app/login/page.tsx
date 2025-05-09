@@ -7,7 +7,7 @@ import { Email, Lock } from '@mui/icons-material'
 import { useMutation } from '@tanstack/react-query'
 import { TailSpin } from 'react-loader-spinner'
 import { useDispatch, useSelector } from 'react-redux'
-import { Cookie } from 'pkg-monorepo'
+import { Cookie, logger } from 'pkg-monorepo'
 import { useRouter } from 'next/navigation'
 import { Dispatch } from '@reduxjs/toolkit'
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
@@ -48,6 +48,7 @@ const Login: React.FC<any> = (): React.ReactNode => {
 
 			router.push('/dashboard')
 		} catch (e: any) {
+			logger(e, 'error')
 			throw new Error(e?.message)
 		}
 	}

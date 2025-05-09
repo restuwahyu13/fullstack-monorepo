@@ -4,7 +4,7 @@ import { Dispatch } from '@reduxjs/toolkit'
 import { useEffect, useCallback, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import AuthGuard from '~/app/auth'
-import { Cookie, HttpClient, HttpClientMethod, HttpClientResponse, xRequestToken } from 'pkg-monorepo'
+import { Cookie, HttpClientMethod, logger, xRequestToken } from 'pkg-monorepo'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -37,6 +37,7 @@ const Dashboard = () => {
 
 			dispatchList(listActionCreator({ list: result?.data?.data || [] }))
 		} catch (e: any) {
+			logger(e, 'error')
 			throw new Error(e?.error)
 		}
 	}, [dispatchList])
@@ -81,8 +82,10 @@ const Dashboard = () => {
 				if (result?.code === 401) Cookie.remove('token')
 				throw res
 			}
+
 			handleClose()
 		} catch (e: any) {
+			logger(e, 'error')
 			throw new Error(e?.error)
 		}
 	}
@@ -127,7 +130,7 @@ const Dashboard = () => {
 			},
 			{
 				name: 'numberOfRents',
-				type: 'text',
+				type: 'number',
 				variant: 'outlined',
 				field: { ...register('numberOfRents') },
 				fieldProps: {

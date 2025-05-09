@@ -1,8 +1,8 @@
 import firebase from 'firebase-admin'
 import { Auth } from 'firebase-admin/auth'
 import { Firestore } from 'firebase-admin/firestore'
-import { Injectable } from 'pkg-monorepo'
 
+import { Injectable } from '~/infrastructure/common/helpers/helper.di'
 import firebaseConfig from '~/infrastructure/common/configs/firebase.json'
 import { Environment } from '~/infrastructure/common/configs/config.env'
 

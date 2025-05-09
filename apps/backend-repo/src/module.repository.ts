@@ -1,4 +1,4 @@
-import { Injectable, Module } from 'pkg-monorepo'
+import { Injectable, Module } from '~/infrastructure/common/helpers/helper.di'
 import { UserRepository } from '~/infrastructure/repositories/user.repositorie'
 
 @Module([

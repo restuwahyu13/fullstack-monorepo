@@ -1,11 +1,11 @@
 import { createSlice, Slice } from '@reduxjs/toolkit'
-import { actionCreator, initialState } from '../../actions/login'
+import { actionCreator, initialState } from '../../actions/auth'
 
 const counterSlice: Slice = createSlice({
-	name: 'login',
+	name: 'auth',
 	initialState: initialState,
 	reducers: actionCreator
 })
 
-export const { increment, decrement } = counterSlice.actions
+export const { loginActionCreator } = counterSlice.actions
 export default counterSlice.reducer

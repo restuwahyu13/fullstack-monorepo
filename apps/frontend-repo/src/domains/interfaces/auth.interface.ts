@@ -1,10 +1,10 @@
 import { PayloadAction } from '@reduxjs/toolkit'
 
 export interface IReduxLoginState {
-	count: number
+	email: string
+	password: string
 }
 
 export interface IReduxLoginActionCreator {
-	increment: (state: IReduxLoginState, action: PayloadAction<IReduxLoginState, string>) => void
-	decrement: (state: IReduxLoginState, action: PayloadAction<IReduxLoginState, string>) => void
+	login: (state: IReduxLoginState, action: PayloadAction<IReduxLoginState, string>) => void
 }

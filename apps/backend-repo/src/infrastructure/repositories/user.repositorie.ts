@@ -1,7 +1,8 @@
 import { Auth, DecodedIdToken, UserRecord } from 'firebase-admin/auth'
 import { DocumentData, Firestore } from 'firebase-admin/firestore'
-import { QueryUserDTO, CreateUserDTO, ParamsUserIdDTO, UpdateUserDTO, Injectable, Inject, logger } from 'pkg-monorepo'
+import { QueryUserDTO, CreateUserDTO, ParamsUserIdDTO, UpdateUserDTO, logger } from 'pkg-monorepo'
 
+import { Inject, Injectable } from '~/infrastructure/common/helpers/helper.di'
 import { EntityUser } from '~/infrastructure/entities/user.entity'
 import { Firebase } from '~/infrastructure/common/configs/config.firebase'
 
@@ -32,7 +33,7 @@ export class UserRepository {
 
   async verifiedToken(token: string): Promise<DecodedIdToken> {
     try {
-      return this.firebase.auth().verifyIdToken(token, true)
+      return this.firebase.auth().verifyIdToken(token)
     } catch (e: any) {
       logger(e, 'error')
       return undefined

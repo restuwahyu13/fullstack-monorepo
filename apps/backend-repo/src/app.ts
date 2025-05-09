@@ -10,11 +10,13 @@ import compression from 'compression'
 import zlib from 'zlib'
 import hpp from 'hpp'
 import consola from 'consola'
-import { apiResponse, GracefulShutdown, Injectable, Container } from 'pkg-monorepo'
 
+import { Injectable, Container } from '~/infrastructure/common/helpers/helper.di'
 import { AppModule } from '~/module.app'
 import { Environment } from '~/infrastructure/common/configs/config.env'
 import { Firebase } from './infrastructure/common/configs/config.firebase'
+import { GracefulShutdown } from '~/infrastructure/common/helpers/helper.gracefulShutdown'
+import { apiResponse } from '~/infrastructure/common/helpers/helper.apiResponse'
 
 @Injectable()
 class App {
@@ -66,6 +68,7 @@ class App {
 
   private route(): void {
     this.app.use(`${this.version}/user`, Container.resolve<Router>('UserRoute'))
+    this.app.use(`${this.version}/auth`, Container.resolve<Router>('AuthRoute'))
   }
 
   private globalRoute(): void {

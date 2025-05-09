@@ -45,7 +45,8 @@
     "http-status-codes": "^2.3.0",
     "morgan": "^1.10.0",
     "pkg-monorepo": "*",
-    "reflect-metadata": "^0.2.2"
+    "reflect-metadata": "^0.2.2",
+    "tsyringe": "^4.8.0"
   },
   "devDependencies": {
     "@types/compression": "^1.7.5",

@@ -20,13 +20,18 @@ export class HttpClient {
 	static async request(options: HttpClientRequestOptions, interceptor?: HttpClientInterceptor): Promise<HttpClientResponse> {
 		try {
 			HttpClient.options = Object.assign(options, HttpClient.options)
-			HttpClient.options.url = `${HttpClient.options.url}/${!options?.path ? '' : options?.path}`
+			HttpClient.options.url = HttpClient.options.url
+			HttpClient.options.withCredentials = true
 
-			if (HttpClient.options?.method) {
+			if (options?.path) {
+				HttpClient.options.url = HttpClient.options.url.concat(options?.path)
+			}
+
+			if (!HttpClient.options?.method) {
 				HttpClient.options.method = HttpClientMethod.GET
 			}
 
-			if (HttpClient.options?.timeout) {
+			if (!HttpClient.options?.timeout) {
 				HttpClient.options.timeout = Math.floor(Date.now() / 1000) + 2 * 60
 			}
 
@@ -37,7 +42,7 @@ export class HttpClient {
 				HttpClient.options.url = `${HttpClient.options.url}?${searchParams.toString()}`
 			}
 
-			HttpClient.create(options)
+			HttpClient.create(HttpClient.options)
 			if (typeof interceptor?.handlerReq === 'function') HttpClient.instance.interceptors.request.use(interceptor.handlerReq)
 			if (typeof interceptor?.handlerRes === 'function') HttpClient.instance.interceptors.response.use(interceptor.handlerRes)
 
